@@ -6,32 +6,19 @@ t_tree		*parse(t_token *tokens)
         return (NULL);
     t_tree  *root;
     t_tree  *operator_node;
-    t_token *logical_operator;
     t_token *pipe_operator;
     t_token *current_token;
 
     current_token = tokens;
-    logical_operator = NULL;
     pipe_operator = NULL;
     root = NULL;
     while (current_token)
     {
-        if (current_token->word_token == OR || current_token->word_token == AND)
-        {
-            logical_operator = current_token;
-            break;
-        }
-        else if (current_token->word_token == PIPE && !pipe_operator)
+        if (current_token->word_token == PIPE && !pipe_operator)
             pipe_operator = current_token;
         current_token = current_token->next;
     }
-    if (logical_operator)
-    {
-        root = create_operator_node(logical_operator);
-        root->left = parse(split_tokens(tokens, logical_operator));
-        root->right = parse(logical_operator->next);
-    }
-    else if (pipe_operator)
+    if (pipe_operator)
     {
         root = create_operator_node(pipe_operator);
         root->left = parse(split_tokens(tokens, pipe_operator));

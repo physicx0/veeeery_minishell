@@ -14,10 +14,6 @@ t_tokenizer identifier(const char *word)
 {
 	if (!ft_strcmp(word, "|"))
 		return (PIPE);
-	else if (!ft_strcmp(word, "||"))
-		return (OR);
-	else if (!ft_strcmp(word, "&&"))
-		return (AND);
 	else if (!ft_strcmp(word, ">"))
 		return (OW_REDIRECTION);
 	else if (!ft_strcmp(word, ">>"))
@@ -79,11 +75,7 @@ char **appender(char **string, int delimiter, int i_word)
 
 char	*operation_returner(char *string, int i_word)
 {
-	if (string[i_word] == '|' && string[i_word + 1] != '|')
-		return ("|");
-	else if (string[i_word] == '|' && string[i_word + 1] == '|')
-		return ("||");
-	else if (string[i_word] == '>' && string[i_word + 1] != '>')
+	if (string[i_word] == '>' && string[i_word + 1] != '>')
 		return (">");
 	else if (string[i_word] == '>' && string[i_word + 1] == '>')
 		return (">>");
@@ -91,7 +83,7 @@ char	*operation_returner(char *string, int i_word)
 		return ("<");
 	else if (string[i_word] == '<' && string[i_word + 1] == '<')
 		return ("<<");
-	return ("&&");
+	return ("|");
 }
 
 char	**env_dup(char **env)

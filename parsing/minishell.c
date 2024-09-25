@@ -90,7 +90,6 @@ char    **input_organizer(char *parse_string)
                         closed = 1;
                 }
                 if ((splited_command[i][y] == '|' && splited_command[i][y - 1] != '\\' && closed == 1)
-                    || (splited_command[i][y] == '&' && splited_command[i][y - 1] != '\\' && closed == 1)
                     || (splited_command[i][y] == '>' && splited_command[i][y - 1] != '\\' && closed == 1)
                     || (splited_command[i][y] == '<' && splited_command[i][y - 1] != '\\' && closed == 1))
                 {
