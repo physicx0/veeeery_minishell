@@ -1,0 +1,26 @@
+                                    HELLO PEER AMAAOUNI sick lovely guy
+CHI KHASSEK T3REF !!!
+
+--you can start from the (execution.c) file that i created in exec directory
+
+--uncomment print_tree function if you wanna visualize the tree
+
+--in case there is no OPERATION (||, &&, |) the root left will contain the first word and all the other flags option will be on right
+
+MORE DETAILS:
+
+      FOR EXAMPLE: echo "abdo is a nice guy (i'm lying)" test
+
+      the root node left will contain (echo) and each other word will be on right
+
+      left->word == echo, right->word == "abdo is a nice guy (i'm lying)", right->word == test.
+
+      other than that the root will contain (&&, ||, |) you know depends on the input;
+
+      mn lekher:
+          
+          in case you wanted to execute a command if you found it on a node keep checking,
+                  the right if theres other flags options to execute
+        (if node->right->word->token != PIPE, AND, OR, keep diging and execution right (flags))
+
+
