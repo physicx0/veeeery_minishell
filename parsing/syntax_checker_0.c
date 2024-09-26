@@ -86,14 +86,15 @@ int     pipe_checker(char *string, int *i, int closed)
         (*i)++;
         if (string[y] == '\0' || string[y] == '|')
             return (1);
-        y++;
-        (*i)++;
         while (string[y] == ' ' || string[y] == '\\' 
             || string[y] == '|' || !string[y] || string[y] == '&')
         {
             if ((string[y] == '\0') || (string[y] == '|' && string[y - 1] != '\\') 
                 || (string[y] == '&' && string[y - 1] != '\\'))
+                {
+                    printf("salut");
                     return (1);
+                }
             y++;
             (*i)++;
         }

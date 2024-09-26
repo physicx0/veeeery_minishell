@@ -34,7 +34,7 @@ t_tree *create_operator_node(t_token *token)
 
     new_node = malloc(sizeof(t_tree));
     new_node->word_token = token->word_token;
-    new_node->word = NULL;
+    new_node->word = ft_strdup("waa serr chof token chbghiti fiya");
     new_node->left = NULL;
     new_node->right = NULL;
     return (new_node);

@@ -17,6 +17,7 @@ typedef enum s_tokenizer
 	DQ_STRING,			//5
 	SQ_STRING,			//6
 	STRING,				//7
+	EMPTY,				//7
 } 	t_tokenizer;
 
 typedef struct s_token 

@@ -51,11 +51,16 @@ t_tree *create_command_subtree(t_token *tokens)
         else if (tokens->word_token == APP_REDIRECTION || tokens->word_token == OW_REDIRECTION || 
                  tokens->word_token == IN_OPERATOR || tokens->word_token == HEREDOC)
         {
-            redirection_node = create_redirection_node(tokens);
-            if (root)
-                link_redirection_to_tree(root, redirection_node);
+            current_node = create_tree_node(tokens);
+            if (!root)
+                root = current_node;
             else
-                root = redirection_node;
+                link_command_node(root, current_node);
+            // redirection_node = create_redirection_node(tokens);
+            // if (root)
+            //     link_redirection_to_tree(root, redirection_node);
+            // else
+            //     root = redirection_node;
         }
         tokens = tokens->next;
     }

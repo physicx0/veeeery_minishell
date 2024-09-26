@@ -24,6 +24,7 @@ char    *value_returner(char *search, char **env)
 {
     char    *exported;
     int     i;
+    exported = NULL;
 
     i = 0;
     while (env[i])
@@ -62,10 +63,10 @@ char    *expand(char *env_var, char **env, int i)
         search = value_returner(search, env);
         if (search)
         {
-            second_part = ft_substr(env_var, ft_strlen(search) + ft_strlen(first_part), ft_strlen(env_var));
+            second_part = ft_substr(env_var, ft_strlen(first_part) + ft_strlen(test) + 1, ft_strlen(env_var)); 
             return ft_strjoin(ft_strjoin(first_part, search), second_part);
         }
-        second_part = ft_substr(env_var, ft_strlen(test) + ft_strlen(first_part), ft_strlen(env_var));
+        second_part = ft_substr(env_var, ft_strlen(first_part), ft_strlen(env_var));
         return ft_strjoin(first_part, second_part);
     }
     else
@@ -74,7 +75,7 @@ char    *expand(char *env_var, char **env, int i)
         if (search)
             return search;
     }
-    return env_var;
+    return (NULL);
 }
 
 void    expand_flager(t_token *head, char **env)
@@ -91,7 +92,6 @@ void    expand_flager(t_token *head, char **env)
     quote = 0;
     current = head;
 
-
     while (current)
     {
         i = 0;
@@ -102,13 +102,21 @@ void    expand_flager(t_token *head, char **env)
             {
                 exported = expand(current->word, env, i); 
                 if (!exported)
-                    i += env_length(&current->word[i]);
-                else
                 {
-                    current->word = exported;
-                    current = head;
-                    break;
+                    if (i == 0)
+                    {
+                        i += env_length(&current->word[i + 1]);
+                        if (!current->word[i])
+                        {
+                            current->word = ft_strdup("");
+                            current->word_token = EMPTY;
+                            break;
+                        }
+                    }
                 }
+                current->word = exported;
+                current = head;
+                break;
             }
             if ((current->word[i] == 39 || current->word[i] == 34) && closed == 1)
             {
