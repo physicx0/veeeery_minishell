@@ -44,9 +44,7 @@ char    *expand(char *env_var, char **env, int i)
     char *first_part;
     char *second_part;
     char *test;
-
     search = ft_substr(env_var, i + 1, env_length(&env_var[i + 1]));
-    
     test = ft_strdup(search);
 
     if (!env_var[i + ft_strlen(search) + 1] && i != 0)
@@ -69,13 +67,18 @@ char    *expand(char *env_var, char **env, int i)
         second_part = ft_substr(env_var, ft_strlen(first_part), ft_strlen(env_var));
         return ft_strjoin(first_part, second_part);
     }
-    else
+    else if (i == 0 && !env_var[i + ft_strlen(search) + 1])
     {
         search = value_returner(search, env);
         if (search)
-            return search;
+            return (search);
+        return (NULL);
     }
-    return (NULL);
+    search = value_returner(search, env);
+    first_part = ft_substr(env_var, ft_strlen(test) + 1, ft_strlen(env_var));
+    if (search)
+        return (ft_strjoin(search, first_part));
+    return (first_part);
 }
 
 void    expand_flager(t_token *head, char **env)
@@ -86,7 +89,9 @@ void    expand_flager(t_token *head, char **env)
     int closed;
     int expandable;
     char *exported;
-    
+    int flager;
+
+    flager = 0;
     expandable = 1;
     closed = 1;
     quote = 0;
@@ -103,19 +108,15 @@ void    expand_flager(t_token *head, char **env)
                 exported = expand(current->word, env, i); 
                 if (!exported)
                 {
-                    if (i == 0)
-                    {
-                        i += env_length(&current->word[i + 1]);
-                        if (!current->word[i])
-                        {
-                            current->word = ft_strdup("");
-                            current->word_token = EMPTY;
-                            break;
-                        }
-                    }
+                    current->word_token = EMPTY;
+                    current->word = ft_strdup("");
+                    current = head;
+                    flager = 1;
+                    break;
                 }
                 current->word = exported;
                 current = head;
+                flager = 1;
                 break;
             }
             if ((current->word[i] == 39 || current->word[i] == 34) && closed == 1)
@@ -137,6 +138,8 @@ void    expand_flager(t_token *head, char **env)
             }
             i++;
         }
-        current = current->next;
+        if (flager == 0)
+            current = current->next;
+        flager = 0;
     }
 }
