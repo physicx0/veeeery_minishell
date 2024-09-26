@@ -51,3 +51,41 @@ char	*ft_strjoin(char *s1, char *s2)
 	malloca[total_len] = '\0';
 	return free(s1), free(s2), malloca;
 }
+
+static int	comparer(char const *s1, char const *set, size_t index)
+{
+	int	i;
+
+	i = 0;
+	while (set[i] != '\0')
+	{
+		if (set[i] == s1[index])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strtrim(char *s1, char *set)
+{
+	int		i;
+	size_t	s1len;
+
+	if (!s1 || !set)
+		return (NULL);
+	i = 0;
+	s1len = ft_strlen(s1);
+	while (s1[i])
+	{
+		while (comparer(s1, set, i) == 1)
+			i++;
+		break ;
+	}
+	while (s1len > 0)
+	{
+		while (comparer(s1, set, s1len - 1) == 1 && s1len > 0)
+			s1len--;
+		break ;
+	}
+	return (ft_substr(s1, i, s1len - i));
+}

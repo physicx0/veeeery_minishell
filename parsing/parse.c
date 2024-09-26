@@ -14,8 +14,11 @@ t_tree		*parse(t_token *tokens)
     root = NULL;
     while (current_token)
     {
-        if (current_token->word_token == PIPE && !pipe_operator)
+        if (current_token->word_token == PIPE)
+        {
             pipe_operator = current_token;
+            break;
+        }
         current_token = current_token->next;
     }
     if (pipe_operator)

@@ -1,28 +1,28 @@
 #include "../includes/minishell.h"
 
-void    link_free(t_token *head)
-{
-    t_token *holder;
-    while (head)
-    {
-        free(head->word);
-        holder = head;
-        free(head);
-        head = holder->next;
-    }
-}
+// void    link_free(t_token *head)
+// {
+//     t_token *holder;
+//     while (head)
+//     {
+//         free(head->word);
+//         holder = head;
+//         free(head);
+//         head = holder->next;
+//     }
+// }
 
-void    ft_free_env(char **env)
-{
-    int i = 0;
-    while (env[i])
-    {
-        free(env[i]);
-        i++;
-    }
-    free(env[i]);
-    free(env);
-}
+// void    ft_free_env(char **env)
+// {
+//     int i = 0;
+//     while (env[i])
+//     {
+//         free(env[i]);
+//         i++;
+//     }
+//     free(env[i]);
+//     free(env);
+// }
 
 int main(int ac, char *av[], char *env[])
 {
@@ -30,15 +30,15 @@ int main(int ac, char *av[], char *env[])
 
     our_env = env_dup(env);
     while (1)
-        parsing_entry( readline("0xhb_shell$ "), our_env);
+        parsing_entry(readline("0xhb_shell$ "), our_env);
 }
 
 void    parsing_entry(char *parse_string, char **env)
 {
     t_token *head;
     t_tree  *root;
-
     char **organized_input;
+
     if (!parse_string)
         exit(1);
     else if (syntax_checker(parse_string))
@@ -50,8 +50,27 @@ void    parsing_entry(char *parse_string, char **env)
     organized_input = input_organizer(parse_string);
     head = lexer(organized_input);
     expand_flager(head, env);
+    // content_trimer(head);
     root = parse(head);
     exec(root, env);
+}
+
+void    content_trimer(t_token *head)
+{
+    t_token *current;
+
+    while (current)
+    {
+        if (identifier(current->word) == SQ_STRING)
+        {
+
+        }
+        else if (identifier(current->word) == DQ_STRING)
+        {
+            
+        }
+        current = current->next;
+    }
 }
 
 t_token	*lexer(char **organized_input)

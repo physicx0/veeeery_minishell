@@ -50,14 +50,16 @@ char		*expand(char *env_var, char **env, int i);
 int			env_length(char *env);
 char		*value_returner(char *search, char **env);
 char		*exporter(char *search, char *env_line);
+char		*ft_strtrim(char *s1, char *set);
+void		content_trimer(t_token *head);
 
 char		**env_dup(char **env);
 void		link_command_node(t_tree *root, t_tree *new_node);
 void		link_redirection_to_tree(t_tree *command, t_tree *redirection);
 void		print_tree(t_tree *node, int state);
 void		ft_free(char **substring, size_t i);
-t_tokenizer	identifier(const char *word);
-t_token 	*token_initializer(t_tokenizer word_token, const char *word);
+t_tokenizer	identifier(char *word);
+t_token 	*token_initializer(t_tokenizer word_token, char *word);
 t_token		*lexer(char **organized_input);
 char		*operation_returner(char *word, int i_word);
 int			word_count(char **string);

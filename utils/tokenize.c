@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-t_token *token_initializer(t_tokenizer word_token, const char *word)
+t_token *token_initializer(t_tokenizer word_token, char *word)
 {
 	t_token *token;
 	token = malloc(sizeof(t_token));
@@ -10,7 +10,7 @@ t_token *token_initializer(t_tokenizer word_token, const char *word)
 	return (token);
 }
 
-t_tokenizer identifier(const char *word)
+t_tokenizer identifier(char *word)
 {
 	if (!ft_strcmp(word, "|"))
 		return (PIPE);
@@ -25,7 +25,7 @@ t_tokenizer identifier(const char *word)
 	else if (word[0] == 39)
 		return (SQ_STRING);
 	else if (word[0] == 34)
-		return (SQ_STRING);
+		return (DQ_STRING);
 	return (STRING);
 }
 
