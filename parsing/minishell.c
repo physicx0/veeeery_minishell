@@ -1,12 +1,36 @@
 #include "../includes/minishell.h"
 
+void    link_free(t_token *head)
+{
+    t_token *holder;
+    while (head)
+    {
+        free(head->word);
+        holder = head;
+        free(head);
+        head = holder->next;
+    }
+}
+
+void    ft_free_env(char **env)
+{
+    int i = 0;
+    while (env[i])
+    {
+        free(env[i]);
+        i++;
+    }
+    free(env[i]);
+    free(env);
+}
+
 int main(int ac, char *av[], char *env[])
 {
     char **our_env;
 
     our_env = env_dup(env);
-    while(1)
-        parsing_entry(readline("0xhb_shell$ "), our_env);
+    while (1)
+        parsing_entry( readline("0xhb_shell$ "), our_env);
 }
 
 void    parsing_entry(char *parse_string, char **env)
