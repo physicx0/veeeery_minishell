@@ -25,7 +25,6 @@ char    *value_returner(char *search, char **env)
     char    *exported;
     int     i;
     exported = NULL;
-
     i = 0;
     while (env[i])
     {
@@ -43,9 +42,9 @@ char    *expand(char *env_var, char **env, int i)
     char *search;
     char *first_part;
     char *second_part;
-    char *test;
+    char *var;
     search = ft_substr(env_var, i + 1, env_length(&env_var[i + 1]));
-    test = ft_strdup(search);
+    var = ft_strdup(search);
 
     if (!env_var[i + ft_strlen(search) + 1] && i != 0)
     {
@@ -61,7 +60,7 @@ char    *expand(char *env_var, char **env, int i)
         search = value_returner(search, env);
         if (search)
         {
-            second_part = ft_substr(env_var, ft_strlen(first_part) + ft_strlen(test) + 1, ft_strlen(env_var)); 
+            second_part = ft_substr(env_var, ft_strlen(first_part) + ft_strlen(var) + 1, ft_strlen(env_var)); 
             return free(env_var), ft_strjoin(ft_strjoin(first_part, search), second_part);
         }
         second_part = ft_substr(env_var, ft_strlen(first_part), ft_strlen(env_var));
@@ -75,7 +74,7 @@ char    *expand(char *env_var, char **env, int i)
         return (NULL);
     }
     search = value_returner(search, env);
-    first_part = ft_substr(env_var, ft_strlen(test) + 1, ft_strlen(env_var));
+    first_part = ft_substr(env_var, ft_strlen(var) + 1, ft_strlen(env_var));
     if (search)
         return free(env_var), ft_strjoin(search, first_part);
     return free(env_var), first_part;

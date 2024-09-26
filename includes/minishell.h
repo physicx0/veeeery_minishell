@@ -44,7 +44,7 @@ t_tree		*create_redirection_node(t_token *token);
 t_tree		*create_operator_node(t_token *token);
 t_token		*split_tokens(t_token *tokens, t_token *operator_token);
 
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char *s1, char *s2);
 void		expand_flager(t_token *head, char **env);
 char		*expand(char *env_var, char **env, int i);
 int			env_length(char *env);

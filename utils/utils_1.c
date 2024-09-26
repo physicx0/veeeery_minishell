@@ -27,7 +27,7 @@ static void	little_conca(char *dst, const char *src)
 	}
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	total_len;
 	char	*malloca;
@@ -49,5 +49,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	little_copy(malloca, s1);
 	little_conca(malloca, s2);
 	malloca[total_len] = '\0';
-	return (malloca);
+	return free(s1), free(s2), malloca;
 }
