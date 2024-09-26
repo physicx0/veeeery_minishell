@@ -42,6 +42,14 @@ t_tree		*create_command_subtree(t_token *tokens);
 t_tree		*create_redirection_node(t_token *token);
 t_tree		*create_operator_node(t_token *token);
 t_token		*split_tokens(t_token *tokens, t_token *operator_token);
+
+char		*ft_strjoin(char const *s1, char const *s2);
+void		expand_flager(t_token *head, char **env);
+char		*expand(char *env_var, char **env, int i);
+int			env_length(char *env);
+char		*value_returner(char *search, char **env);
+char		*exporter(char *search, char *env_line);
+
 char		**env_dup(char **env);
 void		link_command_node(t_tree *root, t_tree *new_node);
 void		link_redirection_to_tree(t_tree *command, t_tree *redirection);

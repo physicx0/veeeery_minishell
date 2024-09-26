@@ -2,8 +2,11 @@
 
 int main(int ac, char *av[], char *env[])
 {
+    char **our_env;
+
+    our_env = env_dup(env);
     while(1)
-        parsing_entry(readline("0xhb_shell$ "), env);
+        parsing_entry(readline("0xhb_shell$ "), our_env);
 }
 
 void    parsing_entry(char *parse_string, char **env)
@@ -18,12 +21,13 @@ void    parsing_entry(char *parse_string, char **env)
     {
         printf("syntax error\n");
         free(parse_string);
-        exit(1);
+        return;
     }
     organized_input = input_organizer(parse_string);
     head = lexer(organized_input);
+    expand_flager(head, env);
     root = parse(head);
-    exec(root, env_dup(env));
+    exec(root, env);
 }
 
 t_token	*lexer(char **organized_input)
