@@ -1,1 +1,0 @@
-exec/execution.c exec/check_path.c exec/libft.c exec/get_args.c exec/redirection.c exec/split.c

@@ -53,26 +53,26 @@ t_tree	*create_command_subtree(t_token *tokens)
 	root = NULL;
 	while (tokens)
 	{
-		if (tokens->word_token == STRING || tokens->word_token == DQ_STRING
-			|| tokens->word_token == SQ_STRING || tokens->word_token == EMPTY)
-		{
+		// if (tokens->word_token == STRING || tokens->word_token == DQ_STRING
+		// 	|| tokens->word_token == SQ_STRING || tokens->word_token == EMPTY)
+		// {
 			current_node = create_tree_node(tokens);
 			if (!root)
 				root = current_node;
 			else
 				link_command_node(root, current_node);
-		}
-		else if (tokens->word_token == APP_REDIRECTION
-			|| tokens->word_token == OW_REDIRECTION
-			|| tokens->word_token == IN_OPERATOR
-			|| tokens->word_token == HEREDOC)
-		{
-			current_node = create_tree_node(tokens);
-			if (!root)
-				root = current_node;
-			else
-				link_command_node(root, current_node);
-		}
+		// }
+		// else if (tokens->word_token == APP_REDIRECTION
+		// 	|| tokens->word_token == OW_REDIRECTION
+		// 	|| tokens->word_token == IN_OPERATOR
+		// 	|| tokens->word_token == HEREDOC)
+		// {
+		// 	current_node = create_tree_node(tokens);
+		// 	if (!root)
+		// 		root = current_node;
+		// 	else
+		// 		link_command_node(root, current_node);
+		// }
 		tokens = tokens->next;
 	}
 	return (root);

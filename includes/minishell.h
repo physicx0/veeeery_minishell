@@ -98,7 +98,7 @@ char				*value_returner(char *search, char **env);
 char				*exporter(char *search, char *env_line);
 char				*ft_strtrim(char *s1, char *set);
 void				content_trimer(t_token *head);
-char				*trimed_returner(char *string);
+int					trim_flager(char *string);
 
 void				count_helper(t_splvar *sv, char const *s, char delimiter);
 void				fill_helper(t_splvar *sv, int delimiter, char **substring,

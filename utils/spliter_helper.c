@@ -55,9 +55,8 @@ void	count_helper(t_splvar *sv, char const *s, char delimiter)
 			}
 			if (sv->closed == 1)
 				sv->words++;
-			else if (s[sv->i] == delimiter)
-				sv->i++;
 		}
-		sv->i++;
+		else if (s[sv->i] == delimiter)
+			sv->i++;
 	}
 }

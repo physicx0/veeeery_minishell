@@ -26,7 +26,7 @@ void	parsing_entry(char *parse_string, char **env)
 	t_token	*head;
 	t_tree	*root;
 	char	**organized_input;
-
+	int i = 0;
 	if (!parse_string)
 		exit(1);
 	else if (syntax_checker(parse_string))
@@ -38,37 +38,53 @@ void	parsing_entry(char *parse_string, char **env)
 	organized_input = input_organizer(parse_string);
 	head = lexer(organized_input);
 	expand_flager(head, env);
-	// content_trimer(head);
+	content_trimer(head);
 	root = parse(head);
 	print_tree(root, 0);
 	link_free(head);
 }
 
-char	*trimed_returner(char *string)
+int	trim_flager(char *string)
 {
-	printf("(%s)\n", string);
-	return (NULL);
+	int i;
+
+	i = 0;
+	while (string[i])
+	{
+		if ((string[i] == 34 || string[i] == 39) && (string[i - 1] != '\\'))
+			return 1;
+		i++;
+	}
+	return 0;
 }
 
 void	content_trimer(t_token *head)
 {
 	t_token	*current;
 	int		i;
+	int		y;
+	char	*trimed;
 
 	current = head;
 	while (current)
 	{
+		y = 0;
 		i = 0;
-		while (current->word[i])
+		if (trim_flager(current->word))
 		{
-			if ((current->word[i] == 34 || current->word[i] == 39) && i != 0
-				&& current->word[i - 1] != '\\')
+			trimed = malloc(ft_strlen(current->word) + 1);
+			while (current->word[i])
 			{
-				current->word = trimed_returner(current->word);
-				trimed_returner(current->word);
-				break ;
+				if (current->word[i] != 39 && current->word[i] == '\\' && current->word[i + 1] != '\\')
+				{
+					trimed[y] = current->word[i];
+					y++;
+				}
+				i++;
 			}
-			i++;
+			trimed[y] = '\0';
+			free(current->word);
+			current->word = trimed;
 		}
 		current = current->next;
 	}
