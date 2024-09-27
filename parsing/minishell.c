@@ -1,16 +1,16 @@
 #include "../includes/minishell.h"
 
-// void    link_free(t_token *head)
-// {
-//     t_token *holder;
-//     while (head)
-//     {
-//         free(head->word);
-//         holder = head;
-//         head = head->next;
-//         free(holder);
-//     }
-// }
+void    link_free(t_token *head)
+{
+    t_token *holder;
+    while (head)
+    {
+        free(head->word);
+        holder = head;
+        head = head->next;
+        free(holder);
+    }
+}
 
 // void    ft_free_env(char **env)
 // {
@@ -50,9 +50,10 @@ void    parsing_entry(char *parse_string, char **env)
     organized_input = input_organizer(parse_string);
     head = lexer(organized_input);
     expand_flager(head, env);
-    content_trimer(head);
+    // content_trimer(head);
     root = parse(head);
     print_tree(root, 0);
+    link_free(head);
     // exec(root, env);
 }
 
@@ -75,7 +76,7 @@ void    content_trimer(t_token *head)
         {
             if ((current->word[i] == 34 || current->word[i] == 39) && i != 0 && current->word[i - 1] != '\\')
             {
-                current->word = trimted_returner(current->word);
+                current->word = trimed_returner(current->word);
                 trimed_returner(current->word);
                 break;
             }

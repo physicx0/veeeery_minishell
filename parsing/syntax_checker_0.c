@@ -57,14 +57,13 @@ int right_redirection_checker(char *string, int *i, int closed)
             (*i)++;
             reset++;
         }
-        if (string[y] == '\0' || (string[y] == '>' && reset == 2) || string[y] == '<')
+        if (!string[y] || (string[y] == '>' && reset == 2))
             return (1);
-        while (string[y] == ' ' || string[y] == '\\' 
-            || string[y] == '>' || !string[y] || string[y] == '&'
-            || string[y] == '|' || string[y] == '<'
-            || !string[y])
+        while (string[y] == ' ' || string[y] == '>' || !string[y]
+                || string[y] == '|' || string[y] == '<'
+                || !string[y] || string[y] == '&')
         {
-            if ((string[y] == '\0') || (string[y] == '<' && string[y - 1] != '\\') 
+            if ((!string[y]) || (string[y] == '<' && string[y - 1] != '\\') 
                 || (string[y] == '&' && string[y - 1] != '\\') || (string[y] == '>' && string[y - 1] != '\\')
                 ||  (string[y] == '|' && string[y - 1] != '\\'))
                     return (1);

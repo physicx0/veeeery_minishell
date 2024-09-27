@@ -54,6 +54,7 @@ char		*ft_strtrim(char *s1, char *set);
 void		content_trimer(t_token *head);
 char		*trimed_returner(char *string);
 
+void		link_free(t_token *head);
 char		**env_dup(char **env);
 void		link_command_node(t_tree *root, t_tree *new_node);
 void		link_redirection_to_tree(t_tree *command, t_tree *redirection);
