@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:05 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:54:09 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 12:12:26 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,29 @@ void	content_trimer(t_token *head)
 
 t_token	*lexer(char **organized_input)
 {
-	int			i;
-	t_token		*head;
-	t_token		*current;
-	t_token		*new_token;
-	t_tokenizer	word_token;
+	t_tokvar	tok_var;
 
-	i = 0;
-	head = NULL;
-	while (organized_input[i])
+	tok_var.i = 0;
+	tok_var.head = NULL;
+	while (organized_input[tok_var.i])
 	{
-		word_token = identifier(organized_input[i]);
-		new_token = token_initializer(word_token, organized_input[i]);
-		if (!head)
+		tok_var.word_token = identifier(organized_input[tok_var.i]);
+		tok_var.new_token = token_initializer(tok_var.word_token,
+				organized_input[tok_var.i]);
+		if (!tok_var.head)
 		{
-			head = new_token;
-			current = new_token;
+			tok_var.head = tok_var.new_token;
+			tok_var.current = tok_var.new_token;
 		}
 		else
 		{
-			current->next = new_token;
-			current = new_token;
+			tok_var.current->next = tok_var.new_token;
+			tok_var.current = tok_var.new_token;
 		}
-		free(organized_input[i]);
-		i++;
+		free(organized_input[tok_var.i]);
+		tok_var.i++;
 	}
-	free(organized_input[i]);
+	free(organized_input[tok_var.i]);
 	free(organized_input);
-	return (head);
+	return (tok_var.head);
 }

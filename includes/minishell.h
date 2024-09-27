@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:12:34 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 10:12:47 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 12:09:29 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ typedef struct s_token
 	char			*word;
 	struct s_token	*next;
 }					t_token;
+
+typedef struct s_tokvar
+{
+	int				i;
+	t_token			*head;
+	t_token			*current;
+	t_token			*new_token;
+	t_tokenizer		word_token;
+}					t_tokvar;
 
 typedef struct s_tree
 {
