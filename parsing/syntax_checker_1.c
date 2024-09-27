@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:54 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 10:15:55 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 11:57:14 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	left_redirection_checker(char *string, int *i, int closed)
 {
-	int y;
-	int reset;
+	int	y;
+	int	reset;
 
 	reset = 0;
 	y = 0;

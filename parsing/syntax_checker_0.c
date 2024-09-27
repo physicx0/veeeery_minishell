@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:50 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:46:44 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 12:02:14 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int	pipe_checker(char *string, int *i, int closed)
 			|| string[y] == '&')
 		{
 			if ((string[y] == '\0') || (string[y] == '|' && string[y
-				- 1] != '\\') || (string[y] == '&' && string[y
-				- 1] != '\\'))
+						- 1] != '\\') || (string[y] == '&' && string[y
+						- 1] != '\\'))
 				return (1);
 			y++;
 			(*i)++;
