@@ -5,7 +5,8 @@ int env_length(char *env)
     int i;
     i = 0;
     while (env[i] && env[i] != 32 && env[i] != '$' 
-        && env[i] != 34 && env[i] != 39 && env[i] != '=' && env[i] != '\\')
+        && env[i] != 34 && env[i] != 39 && env[i] != '=' 
+        && env[i] != '\\' && env[i] != '.')
         i++;
     return i;
 }

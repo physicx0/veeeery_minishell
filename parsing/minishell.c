@@ -51,7 +51,8 @@ void    parsing_entry(char *parse_string, char **env)
     head = lexer(organized_input);
     expand_flager(head, env);
     root = parse(head);
-    exec(root, env);
+    print_tree(root, 0);
+    // exec(root, env);
 }
 
 char    *trimted_returner(char *string)
