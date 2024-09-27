@@ -52,7 +52,7 @@ char		*value_returner(char *search, char **env);
 char		*exporter(char *search, char *env_line);
 char		*ft_strtrim(char *s1, char *set);
 void		content_trimer(t_token *head);
-char		*trimted_returner(char *string);
+char		*trimed_returner(char *string);
 
 char		**env_dup(char **env);
 void		link_command_node(t_tree *root, t_tree *new_node);

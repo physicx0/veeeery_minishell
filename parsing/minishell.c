@@ -56,7 +56,7 @@ void    parsing_entry(char *parse_string, char **env)
     // exec(root, env);
 }
 
-char    *trimted_returner(char *string)
+char    *trimed_returner(char *string)
 {
     printf("(%s)\n", string);
     return NULL;
@@ -76,7 +76,7 @@ void    content_trimer(t_token *head)
             if ((current->word[i] == 34 || current->word[i] == 39) && i != 0 && current->word[i - 1] != '\\')
             {
                 current->word = trimted_returner(current->word);
-                trimted_returner(current->word);
+                trimed_returner(current->word);
                 break;
             }
             i++;
