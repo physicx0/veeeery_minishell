@@ -50,6 +50,7 @@ void    parsing_entry(char *parse_string, char **env)
     organized_input = input_organizer(parse_string);
     head = lexer(organized_input);
     expand_flager(head, env);
+    content_trimer(head);
     root = parse(head);
     print_tree(root, 0);
     // exec(root, env);
