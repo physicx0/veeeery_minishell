@@ -37,7 +37,7 @@ static size_t	substring_len(char const *s, char delimiter)
 	{
 		if (s[i] == delimiter && closed == 1)
 			break ;
-		if ((s[i] == 39 || s[i] == 34) && closed == 1 && s[i - 1] == '\\')
+		if ((s[i] == 39 || s[i] == 34) && closed == 1 && s[i - 1] != '\\')
 		{
 			closed = 0;
 			quote = s[i];
