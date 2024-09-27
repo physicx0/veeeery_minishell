@@ -12,18 +12,6 @@ void    link_free(t_token *head)
     }
 }
 
-// void    ft_free_env(char **env)
-// {
-//     int i = 0;
-//     while (env[i])
-//     {
-//         free(env[i]);
-//         i++;
-//     }
-//     free(env[i]);
-//     free(env);
-// }
-
 int main(int ac, char *av[], char *env[])
 {
     char **our_env;
@@ -50,11 +38,11 @@ void    parsing_entry(char *parse_string, char **env)
     organized_input = input_organizer(parse_string);
     head = lexer(organized_input);
     expand_flager(head, env);
-    // content_trimer(head);
+    content_trimer(head);
     root = parse(head);
-    print_tree(root, 0);
-    link_free(head);
+    // print_tree(root, 0);
     // exec(root, env);
+    link_free(head);
 }
 
 char    *trimed_returner(char *string)
