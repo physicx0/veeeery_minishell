@@ -50,7 +50,6 @@ void    parsing_entry(char *parse_string, char **env)
     organized_input = input_organizer(parse_string);
     head = lexer(organized_input);
     expand_flager(head, env);
-    content_trimer(head);
     root = parse(head);
     exec(root, env);
 }
@@ -63,25 +62,25 @@ char    *trimted_returner(char *string)
 
 void    content_trimer(t_token *head)
 {
-    // t_token *current;
-    // current = head;
-    // int i;
+    t_token *current;
+    current = head;
+    int i;
 
-    // while (current)
-    // {
-    //     i = 0;
-    //     while(current->word[i])
-    //     {
-    //         if ((current->word[i] == 34 || current->word[i] == 39) && i != 0 && current->word[i - 1] != '\\')
-    //         {
-    //             // current->word = trimted_returner(current->word);
-    //             trimted_returner(current->word);
-    //             break;
-    //         }
-    //         i++;
-    //     }
-    //     current = current->next;
-    // }
+    while (current)
+    {
+        i = 0;
+        while(current->word[i])
+        {
+            if ((current->word[i] == 34 || current->word[i] == 39) && i != 0 && current->word[i - 1] != '\\')
+            {
+                current->word = trimted_returner(current->word);
+                trimted_returner(current->word);
+                break;
+            }
+            i++;
+        }
+        current = current->next;
+    }
 }
 
 t_token	*lexer(char **organized_input)
@@ -133,7 +132,8 @@ char    **input_organizer(char *parse_string)
     while(splited_command[i])
     {
         y = 0;
-        if (identifier(splited_command[i]) == STRING)
+        if (identifier(splited_command[i]) == STRING || identifier(splited_command[i]) == SQ_STRING 
+            || identifier(splited_command[i]) == DQ_STRING)
         {
             while(splited_command[i][y])
             {

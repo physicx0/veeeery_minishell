@@ -5,7 +5,7 @@ int env_length(char *env)
     int i;
     i = 0;
     while (env[i] && env[i] != 32 && env[i] != '$' 
-        && env[i] != 34 && env[i] != 39 && env[i] != '=')
+        && env[i] != 34 && env[i] != 39 && env[i] != '=' && env[i] != '\\')
         i++;
     return i;
 }
@@ -105,7 +105,6 @@ void    expand_flager(t_token *head, char **env)
                 && current->word[i + 1] != '$')
             {
                 exported = expand(current->word, env, i); 
-                    printf("alo\n");
                 if (!exported)
                 {
                     current->word_token = EMPTY;
