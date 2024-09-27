@@ -63,7 +63,7 @@ char    *expand(char *env_var, char **env, int i)
             second_part = ft_substr(env_var, ft_strlen(first_part) + ft_strlen(var) + 1, ft_strlen(env_var)); 
             return free(var), free(env_var), ft_strjoin(ft_strjoin(first_part, search), second_part);
         }
-        second_part = ft_substr(env_var, ft_strlen(first_part), ft_strlen(env_var));
+        second_part = ft_substr(env_var, ft_strlen(first_part) + ft_strlen(var) + 1, ft_strlen(env_var));
         return free(var), free(env_var), ft_strjoin(first_part, second_part);
     }
     else if (i == 0 && !env_var[i + ft_strlen(search) + 1])
@@ -105,6 +105,7 @@ void    expand_flager(t_token *head, char **env)
                 && current->word[i + 1] != '$')
             {
                 exported = expand(current->word, env, i); 
+                    printf("alo\n");
                 if (!exported)
                 {
                     current->word_token = EMPTY;

@@ -7,8 +7,8 @@
 //     {
 //         free(head->word);
 //         holder = head;
-//         free(head);
-//         head = holder->next;
+//         head = head->next;
+//         free(holder);
 //     }
 // }
 
@@ -50,27 +50,38 @@ void    parsing_entry(char *parse_string, char **env)
     organized_input = input_organizer(parse_string);
     head = lexer(organized_input);
     expand_flager(head, env);
-    // content_trimer(head);
+    content_trimer(head);
     root = parse(head);
     exec(root, env);
 }
 
+char    *trimted_returner(char *string)
+{
+    printf("(%s)\n", string);
+    return NULL;
+}
+
 void    content_trimer(t_token *head)
 {
-    t_token *current;
+    // t_token *current;
+    // current = head;
+    // int i;
 
-    while (current)
-    {
-        if (identifier(current->word) == SQ_STRING)
-        {
-
-        }
-        else if (identifier(current->word) == DQ_STRING)
-        {
-            
-        }
-        current = current->next;
-    }
+    // while (current)
+    // {
+    //     i = 0;
+    //     while(current->word[i])
+    //     {
+    //         if ((current->word[i] == 34 || current->word[i] == 39) && i != 0 && current->word[i - 1] != '\\')
+    //         {
+    //             // current->word = trimted_returner(current->word);
+    //             trimted_returner(current->word);
+    //             break;
+    //         }
+    //         i++;
+    //     }
+    //     current = current->next;
+    // }
 }
 
 t_token	*lexer(char **organized_input)
