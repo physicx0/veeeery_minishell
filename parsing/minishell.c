@@ -85,14 +85,14 @@ void	content_trimer(t_token *head)
                     if (current->word[i] == 39)
                         closed = 1;
                 }
-				if (current->word[i] != '\\' && current->word[i] != 39 || (current->word[i] == 39 && current->word[i - 1] == '\\'))
+				if ((current->word[i] != '\\' && current->word[i] != 39) || (current->word[i] == 39 && current->word[i - 1] == '\\'))
 				{
-					if (current->word[i] == 34 && closed == 0)
+					if ((current->word[i] == '\\' || current->word[i] == 34) && closed == 0)
 					{
 						trimed[y] = current->word[i];
 						y++;
 					}
-					else if (current->word[i] != 34)
+					else if (current->word[i] != 34 || current->word[i] == 39 && current->word[i - 1] == '\\')
 					{
 						trimed[y] = current->word[i];
 						y++;
