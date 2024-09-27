@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:12:34 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 13:10:26 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 13:37:58 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ typedef struct s_token
 	char			*word;
 	struct s_token	*next;
 }					t_token;
+
+typedef struct s_splvar
+{
+	size_t			words;
+	size_t			i;
+	int				y;
+	int				closed;
+	char			quote;
+}					t_splvar;
 
 typedef struct s_tokvar
 {
@@ -91,6 +100,9 @@ char				*ft_strtrim(char *s1, char *set);
 void				content_trimer(t_token *head);
 char				*trimed_returner(char *string);
 
+void				count_helper(t_splvar *sv, char const *s, char delimiter);
+void				fill_helper(t_splvar *sv, int delimiter, char **substring,
+						const char *s);
 void				append_alloc_cp(t_append *ap, char **string, int delimiter,
 						int i_word);
 void				init_orgvar(t_orgvar *ov, char *parse_string);
