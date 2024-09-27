@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:05 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 12:12:26 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 12:48:49 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	parsing_entry(char *parse_string, char **env)
 	organized_input = input_organizer(parse_string);
 	head = lexer(organized_input);
 	expand_flager(head, env);
-	content_trimer(head);
+	// content_trimer(head);
 	root = parse(head);
 	print_tree(root, 0);
 	link_free(head);

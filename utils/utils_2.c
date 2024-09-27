@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:52:55 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:54:50 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 12:47:48 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,54 +27,30 @@ void	link_free(t_token *head)
 
 char	**input_organizer(char *parse_string)
 {
-	char	**splited_command;
-	int		i;
-	int		y;
-	char	quote;
-	int		closed;
+	t_orgvar	ov;
 
-	closed = 1;
-	quote = 0;
-	y = 0;
-	splited_command = commands_spliter(parse_string, ' ');
-	i = 0;
-	while (splited_command[i])
+	init_orgvar(&ov, parse_string);
+	while (ov.splited_command[ov.i])
 	{
-		y = 0;
-		if (identifier(splited_command[i]) == STRING
-			|| identifier(splited_command[i]) == SQ_STRING
-			|| identifier(splited_command[i]) == DQ_STRING)
+		ov.y = 0;
+		if (string_checker(&ov))
 		{
-			while (splited_command[i][y])
+			while (ov.splited_command[ov.i][ov.y])
 			{
-				if ((splited_command[i][y] == 39 || splited_command[i][y] == 34)
-					&& closed == 1)
+				close_open(&ov);
+				if (append_caller(&ov))
 				{
-					closed = 0;
-					quote = splited_command[i][y];
-				}
-				else
-				{
-					if (splited_command[i][y] == quote)
-						closed = 1;
-				}
-				if ((splited_command[i][y] == '|' && splited_command[i][y
-					- 1] != '\\' && closed == 1)
-					|| (splited_command[i][y] == '>' && splited_command[i][y
-						- 1] != '\\' && closed == 1)
-					|| (splited_command[i][y] == '<' && splited_command[i][y
-						- 1] != '\\' && closed == 1))
-				{
-					splited_command = appender(splited_command, i, y);
-					i = 0;
+					ov.splited_command = appender(ov.splited_command, ov.i,
+							ov.y);
+					ov.i = 0;
 					break ;
 				}
-				y++;
+				ov.y++;
 			}
 		}
-		i++;
+		ov.i++;
 	}
-	return (splited_command);
+	return (ov.splited_command);
 }
 
 int	env_length(char *env)

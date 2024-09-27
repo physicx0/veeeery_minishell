@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:12:34 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 12:09:29 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 13:10:26 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ typedef enum s_tokenizer
 	EMPTY,
 }					t_tokenizer;
 
+typedef struct s_append
+{
+	int				i;
+	char			**orgnized_one;
+	int				size;
+	int				y;
+}					t_append;
+
 typedef struct s_token
 {
 	t_tokenizer		word_token;
@@ -46,6 +54,15 @@ typedef struct s_tokvar
 	t_token			*new_token;
 	t_tokenizer		word_token;
 }					t_tokvar;
+
+typedef struct s_orgvar
+{
+	int				i;
+	int				y;
+	char			quote;
+	int				closed;
+	char			**splited_command;
+}					t_orgvar;
 
 typedef struct s_tree
 {
@@ -74,6 +91,13 @@ char				*ft_strtrim(char *s1, char *set);
 void				content_trimer(t_token *head);
 char				*trimed_returner(char *string);
 
+void				append_alloc_cp(t_append *ap, char **string, int delimiter,
+						int i_word);
+void				init_orgvar(t_orgvar *ov, char *parse_string);
+void				close_open(t_orgvar *ov);
+int					closer(t_orgvar *ov);
+int					string_checker(t_orgvar *ov);
+int					append_caller(t_orgvar *ov);
 void				link_free(t_token *head);
 char				**env_dup(char **env);
 void				link_command_node(t_tree *root, t_tree *new_node);

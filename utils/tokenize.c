@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:16:11 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 10:16:12 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/09/27 13:08:43 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,46 +44,27 @@ t_tokenizer	identifier(char *word)
 
 char	**appender(char **string, int delimiter, int i_word)
 {
-	int		i;
-	char	**orgnized_one;
-	int		size;
-	int		y;
+	t_append	ap;
 
-	size = word_count(string);
-	if (i_word == 0 || !string[delimiter][i_word + 1])
-		orgnized_one = (char **)malloc(sizeof(char *) * (size + 2));
-	else
-		orgnized_one = (char **)malloc(sizeof(char *) * (size + 3));
-	i = 0;
-	y = 0;
-	while (i < delimiter)
-	{
-		orgnized_one[i] = ft_strdup(string[y]);
-		i++;
-		y++;
-	}
-	y++;
-	if (i_word != 0)
-	{
-		orgnized_one[i] = ft_substr(string[delimiter], 0, i_word);
-		i++;
-	}
-	orgnized_one[i] = ft_strdup(operation_returner(string[delimiter], i_word));
-	i++;
+	ap.i = 0;
+	ap.y = 0;
+	ap.size = word_count(string);
+	append_alloc_cp(&ap, string, delimiter, i_word);
 	if (string[delimiter][i_word + 1])
 	{
-		orgnized_one[i] = ft_substr(string[delimiter], i_word
-				+ ft_strlen(orgnized_one[i - 1]), ft_strlen(string[delimiter]));
-		i++;
+		ap.orgnized_one[ap.i] = ft_substr(string[delimiter], i_word
+				+ ft_strlen(ap.orgnized_one[ap.i - 1]),
+				ft_strlen(string[delimiter]));
+		ap.i++;
 	}
-	while (string[y])
+	while (string[ap.y])
 	{
-		orgnized_one[i] = ft_strdup(string[y]);
-		i++;
-		y++;
+		ap.orgnized_one[ap.i] = ft_strdup(string[ap.y]);
+		ap.i++;
+		ap.y++;
 	}
-	orgnized_one[i] = NULL;
-	return (ft_free(string, size + 1), orgnized_one);
+	ap.orgnized_one[ap.i] = NULL;
+	return (ft_free(string, ap.size + 1), ap.orgnized_one);
 }
 
 char	*operation_returner(char *string, int i_word)
