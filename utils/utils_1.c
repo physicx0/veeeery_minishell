@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 10:16:14 by bbelarra42        #+#    #+#             */
+/*   Updated: 2024/09/27 11:44:19 by bbelarra42       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 static void	little_copy(char *dst, const char *src)
@@ -49,7 +61,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	little_copy(malloca, s1);
 	little_conca(malloca, s2);
 	malloca[total_len] = '\0';
-	return free(s1), free(s2), malloca;
+	return (free(s1), free(s2), malloca);
 }
 
 static int	comparer(char const *s1, char const *set, size_t index)

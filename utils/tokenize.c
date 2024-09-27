@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 10:16:11 by bbelarra42        #+#    #+#             */
+/*   Updated: 2024/09/27 10:16:12 by bbelarra42       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-t_token *token_initializer(t_tokenizer word_token, char *word)
+t_token	*token_initializer(t_tokenizer word_token, char *word)
 {
-	t_token *token;
+	t_token	*token;
+
 	token = malloc(sizeof(t_token));
 	token->word_token = word_token;
 	token->word = ft_strdup(word);
@@ -10,7 +23,7 @@ t_token *token_initializer(t_tokenizer word_token, char *word)
 	return (token);
 }
 
-t_tokenizer identifier(char *word)
+t_tokenizer	identifier(char *word)
 {
 	if (!ft_strcmp(word, "|"))
 		return (PIPE);
@@ -29,12 +42,13 @@ t_tokenizer identifier(char *word)
 	return (STRING);
 }
 
-char **appender(char **string, int delimiter, int i_word)
+char	**appender(char **string, int delimiter, int i_word)
 {
-	int i;
-	char **orgnized_one;
-	int size;
-	int y;
+	int		i;
+	char	**orgnized_one;
+	int		size;
+	int		y;
+
 	size = word_count(string);
 	if (i_word == 0 || !string[delimiter][i_word + 1])
 		orgnized_one = (char **)malloc(sizeof(char *) * (size + 2));
@@ -42,7 +56,6 @@ char **appender(char **string, int delimiter, int i_word)
 		orgnized_one = (char **)malloc(sizeof(char *) * (size + 3));
 	i = 0;
 	y = 0;
-
 	while (i < delimiter)
 	{
 		orgnized_one[i] = ft_strdup(string[y]);
@@ -57,10 +70,10 @@ char **appender(char **string, int delimiter, int i_word)
 	}
 	orgnized_one[i] = ft_strdup(operation_returner(string[delimiter], i_word));
 	i++;
-
 	if (string[delimiter][i_word + 1])
 	{
-		orgnized_one[i] = ft_substr(string[delimiter], i_word + ft_strlen(orgnized_one[i - 1]), ft_strlen(string[delimiter]));
+		orgnized_one[i] = ft_substr(string[delimiter], i_word
+				+ ft_strlen(orgnized_one[i - 1]), ft_strlen(string[delimiter]));
 		i++;
 	}
 	while (string[y])
@@ -88,14 +101,13 @@ char	*operation_returner(char *string, int i_word)
 
 char	**env_dup(char **env)
 {
-	int i;
-	char **env_dup;
+	int		i;
+	char	**env_dup;
 
 	i = word_count(env);
 	env_dup = malloc(sizeof(char *) * (i + 1));
 	i = 0;
-
-	while(env[i])
+	while (env[i])
 	{
 		env_dup[i] = ft_strdup(env[i]);
 		i++;

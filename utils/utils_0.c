@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 10:16:16 by bbelarra42        #+#    #+#             */
+/*   Updated: 2024/09/27 11:46:00 by bbelarra42       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	ft_strlen(const char *string)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (string[i])
 		i++;
@@ -55,9 +68,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (malloca);
 }
 
-int		ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp(const char *str1, const char *str2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str1[i] == str2[i] && str1[i])
@@ -69,10 +82,9 @@ int		ft_strcmp(const char *str1, const char *str2)
 
 int	word_count(char **string)
 {
-	int count;
+	int	count;
 
 	count = 0;
-
 	while (string[count])
 		count++;
 	return (count);
