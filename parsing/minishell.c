@@ -51,7 +51,7 @@ int	trim_flager(char *string)
 	i = 0;
 	while (string[i])
 	{
-		if ((string[i] == 34 || string[i] == 39) && (string[i - 1] != '\\'))
+		if (string[i] == 34 || string[i] == 39 || string[i] == '\\')
 			return 1;
 		i++;
 	}
@@ -64,6 +64,10 @@ void	content_trimer(t_token *head)
 	int		i;
 	int		y;
 	char	*trimed;
+	int     closed;
+
+    closed = 1;
+	i = 0;
 
 	current = head;
 	while (current)
@@ -75,10 +79,25 @@ void	content_trimer(t_token *head)
 			trimed = malloc(ft_strlen(current->word) + 1);
 			while (current->word[i])
 			{
-				if (current->word[i] != 39 && current->word[i] == '\\' && current->word[i + 1] != '\\')
+                if ((current->word[i] == 39) && closed == 1)
+                    closed = 0;
+                else
+                {
+                    if (current->word[i] == 39)
+                        closed = 1;
+                }
+				if (current->word[i] != 39)
 				{
-					trimed[y] = current->word[i];
-					y++;
+					if (current->word[i] == 34 && closed == 0)
+					{
+						trimed[y] = current->word[i];
+						y++;
+					}
+					else if (current->word[i] != 34)
+					{
+						trimed[y] = current->word[i];
+						y++;
+					}
 				}
 				i++;
 			}
