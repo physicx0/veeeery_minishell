@@ -78,7 +78,7 @@ void	content_trimer(t_token *head)
 			trimed = malloc(ft_strlen(current->word) + 1);
 			while (current->word[i])
 			{
-                if ((current->word[i] == 39) && closed == 1 && current->word[i - 1] == '\\')
+                if ((current->word[i] == 39) && closed == 1 && current->word[i - 1] != '\\')
                     closed = 0;
                 else
                 {
@@ -87,7 +87,7 @@ void	content_trimer(t_token *head)
                 }
 				if ((current->word[i] != '\\' && current->word[i] != 39) || (current->word[i] == 39 && current->word[i - 1] == '\\'))
 				{
-					if ((current->word[i] == '\\' || current->word[i] == 34) && closed == 0)
+					if ((current->word[i] == 34) && closed == 0)
 					{
 						trimed[y] = current->word[i];
 						y++;
