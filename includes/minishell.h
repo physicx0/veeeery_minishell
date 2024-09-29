@@ -31,6 +31,12 @@ typedef enum s_tokenizer
 	EMPTY,
 }					t_tokenizer;
 
+typedef struct s_env
+{
+	char			*env_line;
+	struct	s_env	*next;
+}			t_env;
+
 typedef struct s_append
 {
 	int				i;
@@ -91,10 +97,10 @@ t_tree				*create_operator_node(t_token *token);
 t_token				*split_tokens(t_token *tokens, t_token *operator_token);
 
 char				*ft_strjoin(char *s1, char *s2);
-void				expand_flager(t_token *head, char **env);
-char				*expand(char *env_var, char **env, int i);
+void				expand_flager(t_token *head, t_env *env);
+char				*expand(char *env_var, t_env *env, int i);
 int					env_length(char *env);
-char				*value_returner(char *search, char **env);
+char				*value_returner(char *search, t_env *env);
 char				*exporter(char *search, char *env_line);
 char				*ft_strtrim(char *s1, char *set);
 void				content_trimer(t_token *head);
@@ -111,7 +117,7 @@ int					closer(t_orgvar *ov);
 int					string_checker(t_orgvar *ov);
 int					append_caller(t_orgvar *ov);
 void				link_free(t_token *head);
-char				**env_dup(char **env);
+t_env				*env_dup(char **env);
 void				link_command_node(t_tree *root, t_tree *new_node);
 void				link_redirection_to_tree(t_tree *command,
 						t_tree *redirection);
@@ -124,7 +130,7 @@ char				*operation_returner(char *word, int i_word);
 int					word_count(char **string);
 char				**appender(char **string, int delimiter, int i_word);
 char				**input_organizer(char *parse_string);
-void				parsing_entry(char *parse_string, char **env);
+void				parsing_entry(char *parse_string, t_env *env);
 int					ft_strlen(const char *string);
 int					syntax_checker(char *parse_string);
 int					quotes_red_checker(char *string);

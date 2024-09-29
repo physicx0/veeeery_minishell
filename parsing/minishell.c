@@ -14,14 +14,14 @@
 
 int	main(int ac, char *av[], char *env[])
 {
-	char	**our_env;
+	t_env *our_env;
 
 	our_env = env_dup(env);
 	while (1)
 		parsing_entry(readline("0xhb_shell$ "), our_env);
 }
 
-void	parsing_entry(char *parse_string, char **env)
+void	parsing_entry(char *parse_string, t_env *env)
 {
 	t_token	*head;
 	t_tree	*root;

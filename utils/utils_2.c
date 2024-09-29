@@ -76,19 +76,19 @@ char	*exporter(char *search, char *env_line)
 	return (NULL);
 }
 
-char	*value_returner(char *search, char **env)
+char	*value_returner(char *search, t_env *env)
 {
 	char	*exported;
-	int		i;
+	t_env	*current;
+	current = env;
 
 	exported = NULL;
-	i = 0;
-	while (env[i])
+	while (current)
 	{
-		exported = exporter(search, env[i]);
+		exported = exporter(search, current->env_line);
 		if (exported)
 			break ;
-		i++;
+		current = current->next;
 	}
 	free(search);
 	return (exported);

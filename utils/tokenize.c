@@ -80,19 +80,41 @@ char	*operation_returner(char *string, int i_word)
 	return ("|");
 }
 
-char	**env_dup(char **env)
+
+t_env	*new_link(char *env)
+{
+	t_env *new_env;
+
+	new_env = malloc(sizeof(t_env));
+	new_env->env_line = ft_strdup(env);
+	new_env->next = NULL;
+}
+
+t_env	*env_dup(char **env)
 {
 	int		i;
-	char	**env_dup;
+	t_env	*our_env;
+	t_env	*current;
+	t_env	*new_one;
 
-	i = word_count(env);
-	env_dup = malloc(sizeof(char *) * (i + 1));
+	our_env = NULL;
+	current = our_env;
 	i = 0;
 	while (env[i])
 	{
-		env_dup[i] = ft_strdup(env[i]);
+		new_one = new_link(env[i]);
+		if (!our_env)
+		{
+			our_env = new_one;
+			current = new_one;
+		}
+		else
+		{
+			current->next = new_one;
+			current = new_one;
+		}
 		i++;
 	}
-	env_dup[i] = NULL;
-	return (env_dup);
+	return (our_env);
 }
+

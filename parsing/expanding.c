@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-char	*expand(char *env_var, char **env, int i)
+char	*expand(char *env_var, t_env *env, int i)
 {
 	char	*search;
 	char	*first_part;
@@ -58,18 +58,16 @@ char	*expand(char *env_var, char **env, int i)
 	return (free(var), free(env_var), first_part);
 }
 
-void	expand_flager(t_token *head, char **env)
+void	expand_flager(t_token *head, t_env *env)
 {
 	t_token	*current;
 	int		i;
 	char	quote;
 	int		closed;
-	int		expandable;
 	char	*exported;
 	int		flager;
 
 	flager = 0;
-	expandable = 1;
 	closed = 1;
 	quote = 0;
 	current = head;
@@ -78,7 +76,14 @@ void	expand_flager(t_token *head, char **env)
 		i = 0;
 		while (current->word[i])
 		{
-			if ((closed == 1 || expandable == 1) && current->word[i] == '$'
+			if (current->word[i] == 39 && closed == 1 && current->word[i - 1] != '\\')
+				closed = 0;
+			else
+			{
+				if (current->word[i] == 39 && current->word[i - 1] != '\\')
+					closed = 1;
+			}
+			if ((closed == 1) && current->word[i] == '$'
 				&& current->word[i - 1] != '\\' && current->word[i + 1] != '$')
 			{
 				exported = expand(current->word, env, i);
@@ -94,24 +99,6 @@ void	expand_flager(t_token *head, char **env)
 				current = head;
 				flager = 1;
 				break ;
-			}
-			if ((current->word[i] == 39 || current->word[i] == 34)
-				&& closed == 1)
-			{
-				quote = current->word[i];
-				if (i == 0 || current->word[i - 1] != '\\')
-				{
-					if (quote == 39)
-						expandable = 0;
-					else if (quote == 34)
-						expandable = 1;
-					closed = 0;
-				}
-			}
-			else
-			{
-				if (current->word[i] == quote && current->word[i - 1] != '\\')
-					closed = 1;
 			}
 			i++;
 		}
