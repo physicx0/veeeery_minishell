@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/wait.h>
 
 typedef enum s_tokenizer
 {
@@ -102,8 +103,7 @@ char				*expand(char *env_var, t_env *env, int i);
 int					env_length(char *env);
 char				*value_returner(char *search, t_env *env);
 char				*exporter(char *search, char *env_line);
-char				*ft_strtrim(char *s1, char *set);
-void				content_trimer(t_token *head);
+void				content_trima(t_token *head);
 int					trim_flager(char *string);
 
 void				count_helper(t_splvar *sv, char const *s, char delimiter);

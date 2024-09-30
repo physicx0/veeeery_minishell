@@ -21,6 +21,38 @@ int	main(int ac, char *av[], char *env[])
 		parsing_entry(readline("0xhb_shell$ "), our_env);
 }
 
+void	heredoc(t_token *head)
+{
+	t_token *current = head;
+	int pid;
+	int status;
+	char *line;
+	int	fd[2];
+	int	count = 0;
+	char big[500];
+	pipe(fd);
+	while (current)
+	{
+		if (current->word_token == HEREDOC)
+		{
+			pid = fork();
+			if (pid == 0)
+			{
+				while(1)
+				{
+					line = readline("> ");
+					if (!ft_strcmp(line, current->next->word))
+						break;
+					write(fd[1], line, ft_strlen(line));
+					count++;
+				}
+			}
+			waitpid(pid, &status, 0);
+		}
+		current = current->next;
+	}
+}
+
 void	parsing_entry(char *parse_string, t_env *env)
 {
 	t_token	*head;
@@ -38,7 +70,8 @@ void	parsing_entry(char *parse_string, t_env *env)
 	organized_input = input_organizer(parse_string);
 	head = lexer(organized_input);
 	expand_flager(head, env);
-	content_trimer(head);
+	content_trima(head);
+	heredoc(head);
 	root = parse(head);
 	print_tree(root, 0);
 	link_free(head);
@@ -58,7 +91,7 @@ int	trim_flager(char *string)
 	return 0;
 }
 
-void	content_trimer(t_token *head)
+void	content_trima(t_token *head)
 {
 	t_token	*current;
 	int		i;

@@ -77,27 +77,3 @@ static int	comparer(char const *s1, char const *set, size_t index)
 	}
 	return (0);
 }
-
-char	*ft_strtrim(char *s1, char *set)
-{
-	int		i;
-	size_t	s1len;
-
-	if (!s1 || !set)
-		return (NULL);
-	i = 0;
-	s1len = ft_strlen(s1);
-	while (s1[i])
-	{
-		while (comparer(s1, set, i) == 1)
-			i++;
-		break ;
-	}
-	while (s1len > 0)
-	{
-		while (comparer(s1, set, s1len - 1) == 1 && s1len > 0)
-			s1len--;
-		break ;
-	}
-	return (ft_substr(s1, i, s1len - i));
-}
