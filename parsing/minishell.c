@@ -84,7 +84,7 @@ int	trim_flager(char *string)
 	i = 0;
 	while (string[i])
 	{
-		if (string[i] == 34 || string[i] == 39 || string[i] == '\\')
+		if ((string[i] == 34 || string[i] == 39 || string[i] == '\\') && string[i - 1] != '\\')
 			return 1;
 		i++;
 	}
