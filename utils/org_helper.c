@@ -26,10 +26,10 @@ int	append_caller(t_orgvar *ov)
 	if ((ov->splited_command[ov->i][ov->y] == '|'
 		&& ov->splited_command[ov->i][ov->y - 1] != '\\' && ov->closed == 1)
 		|| (ov->splited_command[ov->i][ov->y] == '>'
-		&& ov->splited_command[ov->i][ov->y - 1] != '\\' && ov->closed == 1)
+			&& ov->splited_command[ov->i][ov->y - 1] != '\\' && ov->closed == 1)
 		|| (ov->splited_command[ov->i][ov->y] == '<'
-		&& ov->splited_command[ov->i][ov->y - 1] != '\\'
-		&& ov->closed == 1))
+			&& ov->splited_command[ov->i][ov->y - 1] != '\\'
+			&& ov->closed == 1))
 		return (1);
 	return (0);
 }

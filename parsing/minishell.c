@@ -14,8 +14,9 @@
 
 int	main(int ac, char *av[], char *env[])
 {
-	t_env *our_env;
+	t_env	*our_env;
 	t_glob	glob;
+
 	our_env = env_dup(env);
 	glob.env = &our_env;
 	glob.exit_status = 0;
@@ -23,12 +24,12 @@ int	main(int ac, char *av[], char *env[])
 		parsing_entry(readline("0xhb_shell$ "), &glob);
 }
 
-
 void	parsing_entry(char *parse_string, t_glob *glob)
 {
 	t_token	*head;
 	t_tree	*root;
 	char	**organized_input;
+
 	add_history(parse_string);
 	if (!parse_string)
 		exit(1);
@@ -47,23 +48,23 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	root = parse(head);
 	exec(root, glob);
 	printf("EXIT_STATUS: %d\n", glob->exit_status);
-//	unlink("/tmp/");
-//	print_tree(root, 0);
+	//	unlink("/tmp/");
+	//	print_tree(root, 0);
 	// link_free(head);
 }
 
 int	trim_flager(char *string)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (string[i])
 	{
 		if (string[i] == 34 || string[i] == 39 || string[i] == '\\')
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 void	content_trima(t_token *head)
@@ -72,9 +73,9 @@ void	content_trima(t_token *head)
 	int		i;
 	int		y;
 	char	*trimed;
-	int     closed;
+	int		closed;
 
-    closed = 1;
+	closed = 1;
 	i = 0;
 	current = head;
 	while (current)
@@ -86,21 +87,24 @@ void	content_trima(t_token *head)
 			trimed = malloc(ft_strlen(current->word) + 1);
 			while (current->word[i])
 			{
-                if ((current->word[i] == 39) && closed == 1 && current->word[i - 1] != '\\')
-                    closed = 0;
-                else
-                {
-                    if (current->word[i] == 39)
-                        closed = 1;
-                }
-				if ((current->word[i] != '\\' && current->word[i] != 39) || (current->word[i] == 39 && current->word[i - 1] == '\\'))
+				if ((current->word[i] == 39) && closed == 1 && current->word[i
+					- 1] != '\\')
+					closed = 0;
+				else
+				{
+					if (current->word[i] == 39)
+						closed = 1;
+				}
+				if ((current->word[i] != '\\' && current->word[i] != 39)
+					|| (current->word[i] == 39 && current->word[i - 1] == '\\'))
 				{
 					if ((current->word[i] == 34) && closed == 0)
 					{
 						trimed[y] = current->word[i];
 						y++;
 					}
-					else if (current->word[i] != 34 || current->word[i] == 39 && current->word[i - 1] == '\\')
+					else if (current->word[i] != 34 || current->word[i] == 39
+						&& current->word[i - 1] == '\\')
 					{
 						trimed[y] = current->word[i];
 						y++;

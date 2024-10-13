@@ -12,37 +12,34 @@
 
 #include "../includes/minishell.h"
 
-char    *heredoc_expand(char *string, t_env *env)
+char	*heredoc_expand(char *string, t_env *env)
 {
 	int		i;
 	char	*exported;
 
-    i = 0;
-
-    while (string[i])
-    {
-        if (string[i] == '$' && string[i - 1] != '\\' 
-            && string[i + 1] != '$')
-        {
-            exported = expand(string, env, i);
-            string = exported;
-        }
-        i++;
-    }
-    return string;
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == '$' && string[i - 1] != '\\' && string[i + 1] != '$')
+		{
+			exported = expand(string, env, i);
+			string = exported;
+		}
+		i++;
+	}
+	return (string);
 }
 
-int expand_triger(char *line)
+int	expand_triger(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    printf("%s\n", line);
-    while(line[i])
-    {
-        if (line[i] == 39 || line[i] == 34)
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 39 || line[i] == 34)
+			return (0);
+		i++;
+	}
+	return (1);
 }

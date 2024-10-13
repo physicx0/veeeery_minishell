@@ -76,15 +76,16 @@ void	expand_flager(t_token *head, t_env *env)
 		i = 0;
 		while (current->word[i])
 		{
-			if (current->word[i] == 39 && closed == 1 && current->word[i - 1] != '\\')
+			if (current->word[i] == 39 && closed == 1 && current->word[i
+				- 1] != '\\')
 				closed = 0;
 			else
 			{
 				if (current->word[i] == 39 && current->word[i - 1] != '\\')
 					closed = 1;
 			}
-			if ((closed == 1) && current->word[i] == '$'
-				&& current->word[i - 1] != '\\' && current->word[i + 1] != '$')
+			if ((closed == 1) && current->word[i] == '$' && current->word[i
+				- 1] != '\\' && current->word[i + 1] != '$')
 			{
 				exported = expand(current->word, env, i);
 				if (!exported)

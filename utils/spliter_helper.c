@@ -19,7 +19,8 @@ void	fill_helper(t_splvar *sv, int delimiter, char **substring,
 	{
 		if (s[sv->y] == delimiter && sv->closed == 1)
 			break ;
-		if ((s[sv->y] == 39 || s[sv->y] == 34) && sv->closed == 1 && s[sv->y - 1] != '\\')
+		if ((s[sv->y] == 39 || s[sv->y] == 34) && sv->closed == 1 && s[sv->y
+				- 1] != '\\')
 		{
 			sv->closed = 0;
 			sv->quote = s[sv->y];
@@ -41,7 +42,8 @@ void	count_helper(t_splvar *sv, char const *s, char delimiter)
 		{
 			while (s[sv->i] && s[sv->i] != delimiter)
 			{
-				if ((s[sv->i] == 39 || s[sv->i] == 34) && sv->closed == 1 && s[sv->i - 1] != '\\')
+				if ((s[sv->i] == 39 || s[sv->i] == 34) && sv->closed == 1
+					&& s[sv->i - 1] != '\\')
 				{
 					sv->closed = 0;
 					sv->quote = s[sv->i];

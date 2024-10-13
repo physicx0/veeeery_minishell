@@ -16,8 +16,8 @@
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <sys/wait.h>
+# include <unistd.h>
 
 typedef enum s_tokenizer
 {
@@ -35,14 +35,14 @@ typedef enum s_tokenizer
 typedef struct s_env
 {
 	char			*env_line;
-	struct	s_env	*next;
-}			t_env;
+	struct s_env	*next;
+}					t_env;
 
 typedef struct s_glob
 {
-	t_env	**env;
-	int		exit_status;
-}			t_glob;
+	t_env			**env;
+	int				exit_status;
+}					t_glob;
 
 typedef struct s_append
 {
@@ -152,5 +152,5 @@ int					ft_strcmp(const char *str1, const char *str2);
 char				*ft_strdup(const char *str);
 
 void				exec(t_tree *root, t_glob *glob);
-void    here_doc(t_token *node, t_glob *glob);
+void				here_doc(t_token *node, t_glob *glob);
 #endif

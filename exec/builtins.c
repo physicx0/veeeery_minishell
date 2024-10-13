@@ -56,9 +56,9 @@ int	check_rdr(char **arg, t_glob *glob, int infd, int outfd)
 		glob->exit_status = 1;
 		dup2(infd, 0);
 		dup2(outfd, 1);
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 void	built_cmd(char **arg, char **fltr_arg, t_glob *glob)
@@ -70,7 +70,7 @@ void	built_cmd(char **arg, char **fltr_arg, t_glob *glob)
 	infd = dup(0);
 	outfd = dup(1);
 	if (check_rdr(arg, glob, infd, outfd))
-		return;
+		return ;
 	type = is_builtin(*fltr_arg);
 	if (type == 1)
 		glob->exit_status = ft_echo(fltr_arg);

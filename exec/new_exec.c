@@ -29,7 +29,6 @@ void	pipe_sequence(t_tree root, t_env env)
 			close_fd(fd, prv_fd);
 		root = root->right;
 	}
-	
 }
 
 void	op_exec(t_tree *root, t_env *env)

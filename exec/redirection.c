@@ -16,46 +16,47 @@
 int	open_in(char *filename)
 {
 	int	fd;
-    fd = open(filename, O_RDONLY);
-    if (fd == -1)
-    {
-        perror(filename);
-        return (1);
-    }
-    dup2(fd, 0);
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+	{
+		perror(filename);
+		return (1);
+	}
+	dup2(fd, 0);
 	close(fd);
-	return 0;
+	return (0);
 }
 
 int	open_out(char *filename, int mode)
 {
-	int fd;
+	int	fd;
 
 	if (mode == 1)
-    	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else
 		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-    if (fd == -1)
-    {
-        perror(filename);
-        return (1);
-    }
-    dup2(fd, 1);
+	if (fd == -1)
+	{
+		perror(filename);
+		return (1);
+	}
+	dup2(fd, 1);
 	close(fd);
-	return 0;
+	return (0);
 }
 
 int	redirect(char *filename, int mode)
 {
 	if (mode == 1)
-		return open_out(filename, mode);
+		return (open_out(filename, mode));
 	if (mode == 2)
-		return open_out(filename, mode);
+		return (open_out(filename, mode));
 	if (mode == 3)
-		return open_in(filename);
+		return (open_in(filename));
 	if (mode == 4)
-		return open_in(filename);
-	return 0;
+		return (open_in(filename));
+	return (0);
 }
 
 int	redirect_io(char **arg)
@@ -77,7 +78,7 @@ int	redirect_io(char **arg)
 			res = redirect(arg[i + 1], 4);
 		i++;
 	}
-	return res;
+	return (res);
 }
 
 int	is_redirction(char *arg)

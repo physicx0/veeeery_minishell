@@ -104,8 +104,8 @@ int	pipe_checker(char *string, int *i, int closed)
 			|| string[y] == '&')
 		{
 			if ((string[y] == '\0') || (string[y] == '|' && string[y
-						- 1] != '\\') || (string[y] == '&' && string[y
-						- 1] != '\\'))
+					- 1] != '\\') || (string[y] == '&' && string[y
+					- 1] != '\\'))
 				return (1);
 			y++;
 			(*i)++;

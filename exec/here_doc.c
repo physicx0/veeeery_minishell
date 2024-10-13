@@ -16,7 +16,7 @@ char	*add_newline(char *line)
 {
 	char	*new_line;
 	int		i;
-	
+
 	i = 0;
 	new_line = malloc(sizeof(char) * (ft_strlen(line) + 2));
 	while (line[i])
@@ -26,7 +26,7 @@ char	*add_newline(char *line)
 	}
 	new_line[i++] = '\n';
 	new_line[i] = '\0';
-	return new_line;
+	return (new_line);
 }
 
 void	here_doc(t_token *node, t_glob *glob)
@@ -47,22 +47,22 @@ void	here_doc(t_token *node, t_glob *glob)
 			if (pid == 0)
 			{
 				fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			    while (1)
-    			{
-    		    	line = readline(">");
-		    	    if (!line)
-	    	    	    break ;
-			        if (!*node->next->word && !*line)
-    			        break ;
-	    	    	if (strict_strncmp(node->next->word, line))
-		    	        break ;
+				while (1)
+				{
+					line = readline(">");
+					if (!line)
+						break ;
+					if (!*node->next->word && !*line)
+						break ;
+					if (strict_strncmp(node->next->word, line))
+						break ;
 					if (expand_triger(node->next->word))
 						line = heredoc_expand(line, *glob->env);
 					new_line = add_newline(line);
-			        ft_putstr_fd(new_line, fd);
+					ft_putstr_fd(new_line, fd);
 					free(line);
-    			    free(new_line);
-	    		}
+					free(new_line);
+				}
 				close(fd);
 				exit(0);
 			}
