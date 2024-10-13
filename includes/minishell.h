@@ -103,6 +103,14 @@ typedef struct s_tree
 	struct s_tree	*right;
 }					t_tree;
 
+typedef struct s_parse
+{
+	t_tree	*root;
+	t_tree	*operator_node;
+	t_token	*pipe_operator;
+	t_token	*current_token;
+}			t_parse;
+
 t_tree				*parse(t_token *tokens);
 t_tree				*create_tree_node(t_token *token);
 t_tree				*create_redirection_node(t_token *token);
@@ -124,7 +132,7 @@ char				*value_returner(char *search, t_env *env);
 char				*exporter(char *search, char *env_line);
 void				content_trima(t_token *head);
 int					trim_flager(char *string);
-
+int					left_red_helper(char *string, int y, int *i);
 void				count_helper(t_splvar *sv, char const *s, char delimiter);
 void				fill_helper(t_splvar *sv, int delimiter, char **substring,
 						const char *s);

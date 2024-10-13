@@ -32,18 +32,25 @@ int	left_redirection_checker(char *string, int *i, int closed)
 		}
 		if (!string[y] || (string[y] == '<' && reset == 2))
 			return (1);
-		while (string[y] == ' ' || string[y] == '>' || !string[y]
-			|| string[y] == '|' || string[y] == '<' || !string[y]
-			|| string[y] == '&')
-		{
-			if ((!string[y]) || (string[y] == '<' && string[y - 1] != '\\')
-				|| (string[y] == '&' && string[y - 1] != '\\')
-				|| (string[y] == '>' && string[y - 1] != '\\')
-				|| (string[y] == '|' && string[y - 1] != '\\'))
-				return (1);
-			y++;
-			(*i)++;
-		}
+		if (left_red_helper(string, y, i))
+			return (1);
+	}
+	return (0);
+}
+
+int	left_red_helper(char *string, int y, int *i)
+{
+	while (string[y] == ' ' || string[y] == '>' || !string[y]
+		|| string[y] == '|' || string[y] == '<' || !string[y]
+		|| string[y] == '&')
+	{
+		if ((!string[y]) || (string[y] == '<' && string[y - 1] != '\\')
+			|| (string[y] == '&' && string[y - 1] != '\\') || (string[y] == '>'
+				&& string[y - 1] != '\\') || (string[y] == '|' && string[y
+					- 1] != '\\'))
+			return (1);
+		y++;
+		(*i)++;
 	}
 	return (0);
 }

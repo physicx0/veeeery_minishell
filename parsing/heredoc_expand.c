@@ -23,6 +23,11 @@ char	*heredoc_expand(char *string, t_env *env)
 		if (string[i] == '$' && string[i - 1] != '\\' && string[i + 1] != '$')
 		{
 			exported = expand(string, env, i);
+			if (!exported)
+			{
+				string = ft_strdup("");
+				break ;
+			}
 			string = exported;
 		}
 		i++;
