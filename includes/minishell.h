@@ -59,6 +59,15 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
+typedef struct s_trim
+{
+	t_token			*current;
+	int				i;
+	int				y;
+	char			*trimed;
+	int				closed;
+}					t_trim;
+
 typedef struct s_splvar
 {
 	size_t			words;
@@ -102,6 +111,7 @@ t_tree				*create_command_subtree(t_token *tokens);
 t_tree				*create_redirection_node(t_token *token);
 t_tree				*create_operator_node(t_token *token);
 t_token				*split_tokens(t_token *tokens, t_token *operator_token);
+t_env				*new_link(char *string);
 
 char				*ft_strjoin(char *s1, char *s2);
 void				expand_flager(t_token *head, t_env *env);
@@ -109,6 +119,7 @@ int					expand_triger(char *line);
 char				*heredoc_expand(char *string, t_env *env);
 char				*expand(char *env_var, t_env *env, int i);
 int					env_length(char *env);
+void				trim_whiler(t_trim *trim);
 char				*value_returner(char *search, t_env *env);
 char				*exporter(char *search, char *env_line);
 void				content_trima(t_token *head);

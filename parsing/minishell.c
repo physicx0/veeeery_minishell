@@ -69,54 +69,28 @@ int	trim_flager(char *string)
 
 void	content_trima(t_token *head)
 {
-	t_token	*current;
-	int		i;
-	int		y;
-	char	*trimed;
-	int		closed;
+	t_trim	trim;
 
-	closed = 1;
-	i = 0;
-	current = head;
-	while (current)
+	trim.closed = 1;
+	trim.i = 0;
+	trim.current = head;
+	while (trim.current)
 	{
-		y = 0;
-		i = 0;
-		if (trim_flager(current->word))
+		trim.y = 0;
+		trim.i = 0;
+		if (trim_flager(trim.current->word))
 		{
-			trimed = malloc(ft_strlen(current->word) + 1);
-			while (current->word[i])
+			trim.trimed = malloc(ft_strlen(trim.current->word) + 1);
+			while (trim.current->word[trim.i])
 			{
-				if ((current->word[i] == 39) && closed == 1 && current->word[i
-					- 1] != '\\')
-					closed = 0;
-				else
-				{
-					if (current->word[i] == 39)
-						closed = 1;
-				}
-				if ((current->word[i] != '\\' && current->word[i] != 39)
-					|| (current->word[i] == 39 && current->word[i - 1] == '\\'))
-				{
-					if ((current->word[i] == 34) && closed == 0)
-					{
-						trimed[y] = current->word[i];
-						y++;
-					}
-					else if (current->word[i] != 34 || current->word[i] == 39
-						&& current->word[i - 1] == '\\')
-					{
-						trimed[y] = current->word[i];
-						y++;
-					}
-				}
-				i++;
+				trim_whiler(&trim);
+				trim.i++;
 			}
-			trimed[y] = '\0';
-			free(current->word);
-			current->word = trimed;
+			trim.trimed[trim.y] = '\0';
+			free(trim.current->word);
+			trim.current->word = trim.trimed;
 		}
-		current = current->next;
+		trim.current = trim.current->next;
 	}
 }
 
