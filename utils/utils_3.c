@@ -62,3 +62,27 @@ t_env	*env_dup(char **env)
 	}
 	return (our_env);
 }
+
+int	check_help(char *string, int i, int closed)
+{
+	if (left_redirection_checker(&string[i], &i, closed)
+		|| right_redirection_checker(&string[i], &i, closed)
+		|| pipe_checker(&string[i], &i, closed) || ampersand_checker(&string[i],
+			&i, closed))
+		return (1);
+	return (0);
+}
+
+int	caller(char *string, int y, int *i)
+{
+	while (string[y] == ' ' || string[y] == '>' || !string[y]
+		|| string[y] == '|' || string[y] == '<' || !string[y]
+		|| string[y] == '&')
+	{
+		if (red_helper(string, y))
+			return (1);
+		y++;
+		(*i)++;
+	}
+	return (0);
+}

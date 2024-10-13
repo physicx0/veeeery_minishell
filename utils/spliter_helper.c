@@ -95,3 +95,13 @@ void	trim_whiler(t_trim *trim)
 		}
 	}
 }
+
+int	red_helper(char *string, int y)
+{
+	if ((!string[y]) || (string[y] == '<' && string[y - 1] != '\\')
+		|| (string[y] == '&' && string[y - 1] != '\\') || (string[y] == '>'
+			&& string[y - 1] != '\\') || (string[y] == '|' && string[y
+				- 1] != '\\'))
+		return (1);
+	return (0);
+}

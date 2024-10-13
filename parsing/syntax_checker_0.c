@@ -22,10 +22,7 @@ int	quotes_red_checker(char *string)
 	closed = 1;
 	while (string[i])
 	{
-		if (left_redirection_checker(&string[i], &i, closed)
-			|| right_redirection_checker(&string[i], &i, closed)
-			|| pipe_checker(&string[i], &i, closed)
-			|| ampersand_checker(&string[i], &i, closed))
+		if (check_help(string, i, closed))
 			return (0);
 		if ((string[i] == 39 || string[i] == 34) && closed == 1)
 		{
@@ -73,18 +70,8 @@ int	right_redirection_checker(char *string, int *i, int closed)
 		}
 		if (!string[y] || (string[y] == '>' && reset == 2))
 			return (1);
-		while (string[y] == ' ' || string[y] == '>' || !string[y]
-			|| string[y] == '|' || string[y] == '<' || !string[y]
-			|| string[y] == '&')
-		{
-			if ((!string[y]) || (string[y] == '<' && string[y - 1] != '\\')
-				|| (string[y] == '&' && string[y - 1] != '\\')
-				|| (string[y] == '>' && string[y - 1] != '\\')
-				|| (string[y] == '|' && string[y - 1] != '\\'))
-				return (1);
-			y++;
-			(*i)++;
-		}
+		if (caller(string, y, i))
+			return (1);
 	}
 	return (0);
 }
@@ -104,8 +91,8 @@ int	pipe_checker(char *string, int *i, int closed)
 			|| string[y] == '&')
 		{
 			if ((string[y] == '\0') || (string[y] == '|' && string[y
-					- 1] != '\\') || (string[y] == '&' && string[y
-					- 1] != '\\'))
+						- 1] != '\\') || (string[y] == '&' && string[y
+						- 1] != '\\'))
 				return (1);
 			y++;
 			(*i)++;
