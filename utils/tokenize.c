@@ -88,6 +88,7 @@ t_env	*new_link(char *env)
 	new_env = malloc(sizeof(t_env));
 	new_env->env_line = ft_strdup(env);
 	new_env->next = NULL;
+	return new_env;
 }
 
 t_env	*env_dup(char **env)

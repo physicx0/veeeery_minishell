@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:05 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 13:48:54 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/11 23:40:37 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,41 @@
 int	main(int ac, char *av[], char *env[])
 {
 	t_env *our_env;
-
+	t_glob	glob;
 	our_env = env_dup(env);
+	glob.env = &our_env;
+	glob.exit_status = 0;
 	while (1)
-		parsing_entry(readline("0xhb_shell$ "), our_env);
+		parsing_entry(readline("0xhb_shell$ "), &glob);
 }
 
-void	heredoc(t_token *head)
-{
-	t_token *current = head;
-	int pid;
-	int status;
-	char *line;
-	int	fd[2];
-	int	count = 0;
-	char big[500];
-	pipe(fd);
-	while (current)
-	{
-		if (current->word_token == HEREDOC)
-		{
-			pid = fork();
-			if (pid == 0)
-			{
-				while(1)
-				{
-					line = readline("> ");
-					if (!ft_strcmp(line, current->next->word))
-						break;
-					write(fd[1], line, ft_strlen(line));
-					count++;
-				}
-			}
-			waitpid(pid, &status, 0);
-		}
-		current = current->next;
-	}
-}
 
-void	parsing_entry(char *parse_string, t_env *env)
+void	parsing_entry(char *parse_string, t_glob *glob)
 {
 	t_token	*head;
 	t_tree	*root;
 	char	**organized_input;
-	int i = 0;
+	add_history(parse_string);
 	if (!parse_string)
 		exit(1);
 	else if (syntax_checker(parse_string))
 	{
 		printf("syntax error\n");
+		glob->exit_status = 25;
 		free(parse_string);
 		return ;
 	}
 	organized_input = input_organizer(parse_string);
 	head = lexer(organized_input);
-	expand_flager(head, env);
+	expand_flager(head, *glob->env);
 	content_trima(head);
-	heredoc(head);
+	here_doc(head, glob);
 	root = parse(head);
-	print_tree(root, 0);
-	link_free(head);
+	exec(root, glob);
+	printf("EXIT_STATUS: %d\n", glob->exit_status);
+//	unlink("/tmp/");
+//	print_tree(root, 0);
+	// link_free(head);
 }
 
 int	trim_flager(char *string)
@@ -84,7 +59,7 @@ int	trim_flager(char *string)
 	i = 0;
 	while (string[i])
 	{
-		if ((string[i] == 34 || string[i] == 39 || string[i] == '\\') && string[i - 1] != '\\')
+		if (string[i] == 34 || string[i] == 39 || string[i] == '\\')
 			return 1;
 		i++;
 	}
