@@ -37,7 +37,9 @@ void	here_doc(t_token *node, t_glob *glob)
 	char	*file;
 	int		pid;
 	int		wstatus;
+	int		flager;
 
+	flager = 0;
 	file = "/tmp/.HeRe_DoC";
 	while (node)
 	{
@@ -46,6 +48,8 @@ void	here_doc(t_token *node, t_glob *glob)
 			pid = ft_fork();
 			if (pid == 0)
 			{
+				if (expand_triger(node->next->word))
+					flager = 1;
 				fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 				while (1)
 				{
@@ -56,7 +60,7 @@ void	here_doc(t_token *node, t_glob *glob)
 						break ;
 					if (strict_strncmp(node->next->word, line))
 						break ;
-					if (expand_triger(node->next->word))
+					if (flager == 0)
 						line = heredoc_expand(line, *glob->env);
 					new_line = add_newline(line);
 					ft_putstr_fd(new_line, fd);

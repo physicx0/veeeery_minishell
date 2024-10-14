@@ -68,6 +68,14 @@ typedef struct s_trim
 	int				closed;
 }					t_trim;
 
+typedef struct s_expan
+{
+	char	*search;
+	char	*first_part;
+	char	*second_part;
+	char	*var;
+}			t_expan;
+
 typedef struct s_splvar
 {
 	size_t			words;
