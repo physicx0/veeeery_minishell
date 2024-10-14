@@ -38,6 +38,17 @@ typedef struct s_path
 	char	**env_to_free;
 }			t_path;
 
+typedef struct s_heredo
+{
+	int		fd;
+	char	*line;
+	char	*new_line;
+	char	*file;
+	int		pid;
+	int		wstatus;
+	int		flager;
+}			t_heredo;
+
 typedef struct s_pipe
 {
 	int		fd[2];
@@ -48,6 +59,7 @@ typedef struct s_pipe
 	t_env	**env_s;
 }			t_pipe;
 
+int			here_helper(t_token *node, t_glob *glob, t_heredo *v_here);
 void		simple_cmd(t_tree *root, t_glob *glob);
 char		**ft_split(char const *s, char c);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);

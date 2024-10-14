@@ -31,53 +31,50 @@ char	*add_newline(char *line)
 
 void	here_doc(t_token *node, t_glob *glob)
 {
-	int		fd;
-	char	*line;
-	char	*new_line;
-	char	*file;
-	int		pid;
-	int		wstatus;
-	int		flager;
+	t_heredo	v_here;
 
-	flager = 0;
-	file = "/tmp/.HeRe_DoC";
+	v_here.flager = 0;
+	v_here.file = "/tmp/.HeRe_DoC";
 	while (node)
 	{
 		if (node->word_token == HEREDOC)
 		{
-			pid = ft_fork();
-			if (pid == 0)
-			{
-				if (expand_triger(node->next->word))
-					flager = 1;
-				fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-				while (1)
-				{
-					line = readline(">");
-					if (!line)
-						break ;
-					if (!*node->next->word && !*line)
-						break ;
-					if (strict_strncmp(node->next->word, line))
-						break ;
-					if (flager == 0)
-						line = heredoc_expand(line, *glob->env);
-					new_line = add_newline(line);
-					ft_putstr_fd(new_line, fd);
-					free(line);
-					free(new_line);
-				}
-				close(fd);
-				exit(0);
-			}
+			v_here.pid = ft_fork();
+			if (v_here.pid == 0)
+				here_helper(node, glob, &v_here);
 			else
 			{
-				waitpid(pid, &wstatus, 0);
-				exit_status(wstatus, glob);
+				waitpid(v_here.pid, &v_here.wstatus, 0);
+				exit_status(v_here.wstatus, glob);
 				free(node->next->word);
-				node->next->word = ft_strdup(file);
+				node->next->word = ft_strdup(v_here.file);
 			}
 		}
 		node = node->next;
 	}
+}
+
+int	here_helper(t_token *node, t_glob *glob, t_heredo *v_here)
+{
+	if (expand_triger(node->next->word))
+		v_here->flager = 1;
+	v_here->fd = open(v_here->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	while (1)
+	{
+		v_here->line = readline(">");
+		if (!v_here->line)
+			break ;
+		if (!*node->next->word && !*v_here->line)
+			break ;
+		if (strict_strncmp(node->next->word, v_here->line))
+			break ;
+		if (v_here->flager == 0)
+			v_here->line = heredoc_expand(v_here->line, *glob->env);
+		v_here->new_line = add_newline(v_here->line);
+		ft_putstr_fd(v_here->new_line, v_here->fd);
+		free(v_here->line);
+		free(v_here->new_line);
+	}
+	close(v_here->fd);
+	exit (0);
 }
