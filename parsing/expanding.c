@@ -66,53 +66,15 @@ char	*expand(char *env_var, t_env *env, int i)
 	return (free(v_exp.var), free(env_var), v_exp.first_part);
 }
 
-void	expand_flager(t_token *head, t_env *env)
+void	fla_helper_1(t_token *head, t_env *env, t_fla *var_f)
 {
-	t_token	*current;
-	int		i;
-	char	quote;
-	int		closed;
-	char	*exported;
-	int		flager;
-
-	flager = 0;
-	closed = 1;
-	quote = 0;
-	current = head;
-	while (current)
+	if (var_f->current->word[var_f->i] == 39 && var_f->closed == 1
+		&& var_f->current->word[var_f->i - 1] != '\\')
+		var_f->closed = 0;
+	else
 	{
-		i = 0;
-		while (current->word[i])
-		{
-			if (current->word[i] == 39 && closed == 1 && current->word[i
-				- 1] != '\\')
-				closed = 0;
-			else
-			{
-				if (current->word[i] == 39 && current->word[i - 1] != '\\')
-					closed = 1;
-			}
-			if ((closed == 1) && current->word[i] == '$' && current->word[i
-				- 1] != '\\' && current->word[i + 1] != '$')
-			{
-				exported = expand(current->word, env, i);
-				if (!exported)
-				{
-					current->word_token = EMPTY;
-					current->word = ft_strdup("");
-					current = head;
-					flager = 1;
-					break ;
-				}
-				current->word = exported;
-				current = head;
-				flager = 1;
-				break ;
-			}
-			i++;
-		}
-		if (flager == 0)
-			current = current->next;
-		flager = 0;
+		if (var_f->current->word[var_f->i] == 39
+			&& var_f->current->word[var_f->i - 1] != '\\')
+			var_f->closed = 1;
 	}
 }

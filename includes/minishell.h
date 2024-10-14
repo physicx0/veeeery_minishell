@@ -70,11 +70,11 @@ typedef struct s_trim
 
 typedef struct s_expan
 {
-	char	*search;
-	char	*first_part;
-	char	*second_part;
-	char	*var;
-}			t_expan;
+	char			*search;
+	char			*first_part;
+	char			*second_part;
+	char			*var;
+}					t_expan;
 
 typedef struct s_splvar
 {
@@ -113,11 +113,21 @@ typedef struct s_tree
 
 typedef struct s_parse
 {
-	t_tree	*root;
-	t_tree	*operator_node;
-	t_token	*pipe_operator;
-	t_token	*current_token;
-}			t_parse;
+	t_tree			*root;
+	t_tree			*operator_node;
+	t_token			*pipe_operator;
+	t_token			*current_token;
+}					t_parse;
+
+typedef struct s_fla
+{
+	t_token	*current;
+	int		i;
+	char	quote;
+	int		closed;
+	char	*exported;
+	int		flager;
+}			t_fla;
 
 t_tree				*parse(t_token *tokens);
 t_tree				*create_tree_node(t_token *token);
@@ -129,6 +139,12 @@ t_tree				*create_operator_node(t_token *token);
 t_token				*split_tokens(t_token *tokens, t_token *operator_token);
 t_env				*new_link(char *string);
 
+void				fla_helper_1(t_token *head, t_env *env, t_fla *var_f);
+int					fla_helper(t_token *head, t_env *env, t_fla *var_f);
+char				*expan_helper_1(char *env_var, t_env *env, int i,
+						t_expan *v_exp);
+char				*expan_helper_2(char *env_var, t_env *env, int i,
+						t_expan *v_exp);
 char				*ft_strjoin(char *s1, char *s2);
 void				expand_flager(t_token *head, t_env *env);
 int					expand_triger(char *line);
