@@ -47,7 +47,7 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	content_trima(head);
 	root = parse(head);
 	exec(root, glob);
-	printf("EXIT_STATUS: %d\n", glob->exit_status);
+	// printf("EXIT_STATUS: %d\n", glob->exit_status);
 	//	unlink("/tmp/");
 	//	print_tree(root, 0);
 	// link_free(head);
