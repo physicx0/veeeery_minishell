@@ -121,13 +121,21 @@ typedef struct s_parse
 
 typedef struct s_fla
 {
-	t_token	*current;
-	int		i;
-	char	quote;
-	int		closed;
-	char	*exported;
-	int		flager;
-}			t_fla;
+	t_token			*current;
+	int				i;
+	char			quote;
+	int				closed;
+	char			*exported;
+	int				flager;
+}					t_fla;
+
+typedef struct s_entry
+{
+	t_token			*head;
+	t_token			*prev;
+	t_tree			*root;
+	char			**organized_input;
+}					t_entry;
 
 t_tree				*parse(t_token *tokens);
 t_tree				*create_tree_node(t_token *token);
@@ -138,7 +146,8 @@ t_tree				*create_redirection_node(t_token *token);
 t_tree				*create_operator_node(t_token *token);
 t_token				*split_tokens(t_token *tokens, t_token *operator_token);
 t_env				*new_link(char *string);
-
+t_token				*dup_head(t_token *head);
+t_token				*dup_linker(t_token *head);
 void				fla_helper_1(t_token *head, t_env *env, t_fla *var_f);
 int					fla_helper(t_token *head, t_env *env, t_fla *var_f);
 char				*expan_helper_1(char *env_var, t_env *env, int i,
@@ -198,5 +207,5 @@ int					ft_strcmp(const char *str1, const char *str2);
 char				*ft_strdup(const char *str);
 
 void				exec(t_tree *root, t_glob *glob);
-void				here_doc(t_token *node, t_glob *glob);
+void				here_doc(t_token *node, t_glob *glob, t_token *prev);
 #endif

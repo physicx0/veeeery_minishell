@@ -26,9 +26,7 @@ int	main(int ac, char *av[], char *env[])
 
 void	parsing_entry(char *parse_string, t_glob *glob)
 {
-	t_token	*head;
-	t_tree	*root;
-	char	**organized_input;
+	t_entry	var_ent;
 
 	add_history(parse_string);
 	if (!parse_string)
@@ -40,16 +38,17 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 		free(parse_string);
 		return ;
 	}
-	organized_input = input_organizer(parse_string);
-	head = lexer(organized_input);
-	expand_flager(head, *glob->env);
-	here_doc(head, glob);
-	content_trima(head);
-	root = parse(head);
-	exec(root, glob);
-	// printf("EXIT_STATUS: %d\n", glob->exit_status);
-	//	unlink("/tmp/");
-	//	print_tree(root, 0);
+	var_ent.organized_input = input_organizer(parse_string);
+	var_ent.head = lexer(var_ent.organized_input);
+	var_ent.prev = dup_head(var_ent.head);
+	expand_flager(var_ent.head, *glob->env);
+	content_trima(var_ent.head);
+	here_doc(var_ent.head, glob, var_ent.prev);
+	var_ent.root = parse(var_ent.head);
+	exec(var_ent.root, glob);
+	printf("EXIT_STATUS: %d\n", glob->exit_status);
+	// unlink("/tmp/");
+	// print_tree(root, 0);
 	// link_free(head);
 }
 

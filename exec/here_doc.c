@@ -29,7 +29,7 @@ char	*add_newline(char *line)
 	return (new_line);
 }
 
-void	here_doc(t_token *node, t_glob *glob)
+void	here_doc(t_token *node, t_glob *glob, t_token *prev)
 {
 	t_heredo	v_here;
 
@@ -41,7 +41,7 @@ void	here_doc(t_token *node, t_glob *glob)
 		{
 			v_here.pid = ft_fork();
 			if (v_here.pid == 0)
-				here_helper(node, glob, &v_here);
+				here_helper(node, glob, &v_here, prev);
 			else
 			{
 				waitpid(v_here.pid, &v_here.wstatus, 0);
@@ -51,12 +51,13 @@ void	here_doc(t_token *node, t_glob *glob)
 			}
 		}
 		node = node->next;
+		prev = prev->next;
 	}
 }
 
-int	here_helper(t_token *node, t_glob *glob, t_heredo *v_here)
+int	here_helper(t_token *node, t_glob *glob, t_heredo *v_here, t_token *prev)
 {
-	if (expand_triger(node->next->word))
+	if (expand_triger(prev->next->word))
 		v_here->flager = 1;
 	v_here->fd = open(v_here->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (1)
