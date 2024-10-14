@@ -43,8 +43,8 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	organized_input = input_organizer(parse_string);
 	head = lexer(organized_input);
 	expand_flager(head, *glob->env);
-	content_trima(head);
 	here_doc(head, glob);
+	content_trima(head);
 	root = parse(head);
 	exec(root, glob);
 	printf("EXIT_STATUS: %d\n", glob->exit_status);

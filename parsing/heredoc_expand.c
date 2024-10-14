@@ -43,8 +43,8 @@ int	expand_triger(char *line)
 	while (line[i])
 	{
 		if (line[i] == 39 || line[i] == 34)
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
