@@ -19,7 +19,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-extern int G_VAR;
+extern int			g_var;
 
 typedef enum s_tokenizer
 {

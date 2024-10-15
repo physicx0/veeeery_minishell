@@ -65,7 +65,7 @@ void	hd_exit_status(int wstatus, t_glob *glob)
 		glob->exit_status = WTERMSIG(wstatus);
 		if (glob->exit_status == SIGINT)
 		{
-			G_VAR = 1;
+			g_var = 1;
 			glob->exit_status = 1;
 		}
 	}
@@ -94,7 +94,7 @@ void	here_doc(t_token *node, t_glob *glob, t_token *prev)
 	char	*new_file;
 	int		c;
 
-	G_VAR = 0;
+	g_var = 0;
 	file = ft_strdup("/tmp/.HeRe_DoC");
 	c = 'a';
 	while (node)
@@ -108,7 +108,7 @@ void	here_doc(t_token *node, t_glob *glob, t_token *prev)
 		}
 		if (node->word_token == HEREDOC)
 			x_hdoc(node, glob, file, prev);
-		if (G_VAR)
+		if (g_var)
 			break ;
 		node = node->next;
 		prev = prev->next;

@@ -28,7 +28,7 @@ int	xf_ok(char *cmd, char *pathname, t_glob *glob)
 
 char	*x_path(char *cmd, t_path *path_info, t_glob *glob)
 {
-	int bola;
+	int	bola;
 
 	bola = 0;
 	path_info->env_paths = ft_split(path_info->path, ':');
@@ -62,7 +62,7 @@ char	*check_path(char *cmd, t_glob *glob)
 	t_path	path_info;
 
 	if (!*cmd)
-		return no_cmd(cmd, glob), NULL;
+		return (no_cmd(cmd, glob), NULL);
 	if (ft_strchr(cmd, '/'))
 	{
 		dprintf(2, "mok\n");
