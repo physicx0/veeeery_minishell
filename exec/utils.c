@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 07:09:26 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/06 22:07:48 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/13 18:08:04 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,16 @@ void	exit_status(int wstatus, t_glob *glob)
 	if (WIFEXITED(wstatus))
 		glob->exit_status = WEXITSTATUS(wstatus);
 	else if (WIFSIGNALED(wstatus))
+	{
 		glob->exit_status = WTERMSIG(wstatus);
+		if (glob->exit_status == SIGINT)
+			glob->exit_status = 130;
+		else if (glob->exit_status == SIGQUIT)
+		{
+			printf("Quit: %d\n", glob->exit_status);
+			glob->exit_status = 131;
+		}
+	}
 }
 
 int	free_split(char **arr)

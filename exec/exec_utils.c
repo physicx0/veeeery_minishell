@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:19:56 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/11 23:51:28 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:52:05 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	pipe_cmd(t_tree *root, t_glob *glob)
 {
 	t_cmd	strc;
 
+	reset_signals();
 	strc.arg = generate_arg(root);
 	strc.fltr_arg = filter_arg(strc.arg);
 	if (strc.fltr_arg && *(strc.fltr_arg) && is_builtin(*(strc.fltr_arg)))

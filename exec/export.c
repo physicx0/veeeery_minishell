@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:58:47 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/06 23:48:33 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:04:09 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,10 @@ int	ft_export(char **arg, t_env **env)
 	int	res;
 
 	res = 0;
-	if (!arg[1])
+	if (!*arg)
 		print_var(*env);
 	else
 	{
-		arg++;
 		while (*arg)
 		{
 			if (check_var(*arg))

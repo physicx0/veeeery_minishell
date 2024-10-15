@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 05:44:10 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/11 16:19:36 by amaaouni         ###   ########.fr       */
+/*   Created: 2024/10/10 18:57:15 by amaaouni          #+#    #+#             */
+/*   Updated: 2024/10/13 18:20:17 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,6 @@ typedef struct s_path
 	char	**env_to_free;
 }			t_path;
 
-typedef struct s_heredo
-{
-	int		fd;
-	char	*line;
-	char	*new_line;
-	char	*file;
-	int		pid;
-	int		wstatus;
-	int		flager;
-}			t_heredo;
-
 typedef struct s_pipe
 {
 	int		fd[2];
@@ -59,8 +48,6 @@ typedef struct s_pipe
 	t_env	**env_s;
 }			t_pipe;
 
-int			here_helper(t_token *node, t_glob *glob, t_heredo *v_here,
-				t_token *prev);
 void		simple_cmd(t_tree *root, t_glob *glob);
 char		**ft_split(char const *s, char c);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
@@ -108,5 +95,9 @@ int			no_cmd(char *cmd, t_glob *glob);
 int			is_dir(char *cmd, t_glob *glob);
 int			check_var(char *arg);
 int			strict_strncmp(char *s1, char *s2);
+void		ft_tolower(char *c);
+int			ft_isnum(int c);
+int			ft_isdigit(int c);
+void		ft_putstr_fd(char *s, int fd);
 
 #endif

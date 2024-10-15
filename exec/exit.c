@@ -6,18 +6,11 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:51:08 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/06 22:47:23 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:51:48 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
 
 int	is_numeric(const char *str)
 {

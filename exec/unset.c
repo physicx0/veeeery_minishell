@@ -6,18 +6,11 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:50:47 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/06 23:42:26 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:50:25 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-int	ft_isnum(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
 
 int	check_var(char *arg)
 {
@@ -25,6 +18,8 @@ int	check_var(char *arg)
 		return (0);
 	while (*arg)
 	{
+		if (*arg == '=')
+			return (1);
 		if (!ft_isalpha(*arg) && !ft_isnum(*arg) && *arg != '_')
 			return (0);
 		arg++;

@@ -1,40 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_exec.c                                         :+:      :+:    :+:   */
+/*   utils_I.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 19:39:19 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/03 12:58:05 by amaaouni         ###   ########.fr       */
+/*   Created: 2024/10/13 20:44:54 by amaaouni          #+#    #+#             */
+/*   Updated: 2024/10/13 20:53:03 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	pipe_sequence(t_tree root, t_env env)
+int	strict_strncmp(char *s1, char *s2)
 {
-	int	fd[2];
-	int	prv_fd;
-
-	while (root)
-	{
-		pipe(fd);
-		if (fork() == 0)
-		{
-			redirect_io(fd, prv_fd);
-			pipe_cmd(root->left, env);
-		}
-		else
-			close_fd(fd, prv_fd);
-		root = root->right;
-	}
+	if (ft_strlen(s1) == ft_strlen(s2) && !ft_strncmp(s1, s2, ft_strlen(s2)))
+		return (1);
+	return (0);
 }
 
-void	op_exec(t_tree *root, t_env *env)
+void	ft_tolower(char *c)
 {
-	if (root->word_token == PIPE)
-		pipe_sequence(root, env);
-	else
-		simple_cmd(root, env);
+	if (*c >= 65 && *c <= 90)
+		*c += 32;
+}
+
+int	ft_isnum(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
 }

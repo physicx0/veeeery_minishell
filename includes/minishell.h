@@ -19,6 +19,8 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+extern int G_VAR;
+
 typedef enum s_tokenizer
 {
 	PIPE,
@@ -208,4 +210,9 @@ char				*ft_strdup(const char *str);
 
 void				exec(t_tree *root, t_glob *glob);
 void				here_doc(t_token *node, t_glob *glob, t_token *prev);
+void				setup_main_signals(void);
+void				main_sigquit(int sigquit);
+void				main_sigint(int sigint);
+void				reset_signals(void);
+void				hdoc_signals(void);
 #endif

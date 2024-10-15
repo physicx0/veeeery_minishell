@@ -12,6 +12,8 @@
 
 #include "../includes/minishell.h"
 
+int	G_VAR = 0;
+
 int	main(int ac, char *av[], char *env[])
 {
 	t_env	*our_env;
@@ -20,9 +22,11 @@ int	main(int ac, char *av[], char *env[])
 	our_env = env_dup(env);
 	glob.env = &our_env;
 	glob.exit_status = 0;
+	setup_main_signals();
 	while (1)
 		parsing_entry(readline("0xhb_shell$ "), &glob);
 }
+
 
 void	parsing_entry(char *parse_string, t_glob *glob)
 {
@@ -44,6 +48,11 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	expand_flager(var_ent.head, *glob->env);
 	content_trima(var_ent.head);
 	here_doc(var_ent.head, glob, var_ent.prev);
+	if (G_VAR)
+	{
+		printf("EXIT_STATUS: %d\n", glob->exit_status);
+		return;
+	}
 	var_ent.root = parse(var_ent.head);
 	exec(var_ent.root, glob);
 	printf("EXIT_STATUS: %d\n", glob->exit_status);

@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 07:45:16 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/06 23:54:41 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:48:58 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,8 @@ int	ft_pwd(void)
 	{
 		printf("%s\n", pwd);
 		free(pwd);
-		return (0);
 	}
-	perror("mok");
-	return (1);
+	return (0);
 }
 
 int	ft_env(t_env *env)

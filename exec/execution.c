@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 05:43:46 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/11 16:31:22 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:51:42 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	exec(t_tree *root, t_glob *glob)
 
 void	execute_cmd(t_cmd *strc, t_glob *glob)
 {
+	reset_signals();
 	if (redirect_io(strc->arg))
 		exit(1);
 	free_split(strc->arg);
