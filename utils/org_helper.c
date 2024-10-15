@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 12:30:41 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 13:09:57 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 23:36:41 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,9 @@ int	string_checker(t_orgvar *ov)
 
 int	append_caller(t_orgvar *ov)
 {
-	if ((ov->splited_command[ov->i][ov->y] == '|'
-		&& ov->splited_command[ov->i][ov->y - 1] != '\\' && ov->closed == 1)
-		|| (ov->splited_command[ov->i][ov->y] == '>'
-			&& ov->splited_command[ov->i][ov->y - 1] != '\\' && ov->closed == 1)
-		|| (ov->splited_command[ov->i][ov->y] == '<'
-			&& ov->splited_command[ov->i][ov->y - 1] != '\\'
-			&& ov->closed == 1))
+	if ((ov->splited_command[ov->i][ov->y] == '|' && ov->closed == 1)
+		|| (ov->splited_command[ov->i][ov->y] == '>' && ov->closed == 1)
+		|| (ov->splited_command[ov->i][ov->y] == '<' && ov->closed == 1))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:45 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:43:00 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 15:20:08 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_tree	*create_command_subtree(t_token *tokens)
 {
 	t_tree	*root;
 	t_tree	*current_node;
-	t_tree	*redirection_node;
 
 	root = NULL;
 	while (tokens)

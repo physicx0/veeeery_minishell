@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 05:43:46 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/13 16:51:42 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:32:40 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,12 @@ void	simple_cmd(t_tree *root, t_glob *glob)
 	strc.arg = generate_arg(root);
 	strc.fltr_arg = filter_arg(strc.arg);
 	if (strc.fltr_arg && *strc.fltr_arg && is_builtin(*(strc.fltr_arg)))
-		return (built_cmd(strc.arg, strc.fltr_arg, glob));
+	{
+		built_cmd(strc.arg, strc.fltr_arg, glob);
+		free_split(strc.arg);
+		free_split(strc.fltr_arg);
+		return ;
+	}
 	strc.pid = ft_fork();
 	if (strc.pid == -1)
 	{

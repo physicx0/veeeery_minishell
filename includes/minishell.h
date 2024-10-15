@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:12:34 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/11 16:49:42 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:11:02 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include "readline.h"
 
 extern int			g_var;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_spliter.c                                      :+:      :+:    :+:   */
+/*   expan_help.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:16:04 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 13:41:50 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 23:38:50 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	fla_helper(t_token *head, t_env *env, t_fla *var_f)
 {
 	fla_helper_1(head, env, var_f);
 	if ((var_f->closed == 1) && var_f->current->word[var_f->i] == '$'
-		&& var_f->current->word[var_f->i - 1] != '\\'
 		&& var_f->current->word[var_f->i + 1] != '$')
 	{
 		var_f->exported = expand(var_f->current->word, env, var_f->i);

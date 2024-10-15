@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:54 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:57:14 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 23:32:17 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	left_redirection_checker(char *string, int *i, int closed)
 
 	reset = 0;
 	y = 0;
-	if ((closed == 1 && string[y] == '<' && string[y - 1] != '\\'))
+	if (closed == 1 && string[y] == '<')
 	{
 		y++;
 		(*i)++;
@@ -44,10 +44,8 @@ int	left_red_helper(char *string, int y, int *i)
 		|| string[y] == '|' || string[y] == '<' || !string[y]
 		|| string[y] == '&')
 	{
-		if ((!string[y]) || (string[y] == '<' && string[y - 1] != '\\')
-			|| (string[y] == '&' && string[y - 1] != '\\') || (string[y] == '>'
-				&& string[y - 1] != '\\') || (string[y] == '|' && string[y
-					- 1] != '\\'))
+		if (!string[y] || string[y] == '<'
+			|| string[y] == '&' || string[y] == '>' || string[y] == '|')
 			return (1);
 		y++;
 		(*i)++;

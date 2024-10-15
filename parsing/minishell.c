@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:05 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/11 23:40:37 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:37:28 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,30 @@
 
 int	g_var = 0;
 
+void free_tree(t_tree *node)
+{
+    if (!node)
+        return;
+    if (node->word)
+        free(node->word);
+    free_tree(node->left);
+    free_tree(node->right);
+    free(node);
+}
+
+void	leaks(void)
+{
+	system("leaks minishell");
+}
+
 int	main(int ac, char *av[], char *env[])
 {
 	t_env	*our_env;
 	t_glob	glob;
-
+	
+//	atexit(leaks);
+	(void)ac;
+	(void)av;
 	our_env = env_dup(env);
 	glob.env = &our_env;
 	glob.exit_status = 0;
@@ -49,6 +68,7 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	here_doc(var_ent.head, glob, var_ent.prev);
 	if (g_var)
 	{
+		free(parse_string);
 		printf("EXIT_STATUS: %d\n", glob->exit_status);
 		return ;
 	}
@@ -56,8 +76,10 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	exec(var_ent.root, glob);
 	printf("EXIT_STATUS: %d\n", glob->exit_status);
 	// unlink("/tmp/");
-	// print_tree(root, 0);
-	// link_free(head);
+	free_tree(var_ent.root);
+	link_free(var_ent.head);
+	link_free(var_ent.prev);
+	free(parse_string);
 }
 
 int	trim_flager(char *string)

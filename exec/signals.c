@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:55:33 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/13 18:16:03 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:38:54 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	main_sigint(int sigint)
 	(void)sigint;
 	printf("\n");
 	rl_on_new_line();
-	rl_replace_line("", 0);
+//	rl_replace_line("", 0);
 	rl_redisplay();
 }
 

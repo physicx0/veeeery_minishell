@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:40 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:54:33 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 23:40:17 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ char	*expand(char *env_var, t_env *env, int i)
 
 void	fla_helper_1(t_token *head, t_env *env, t_fla *var_f)
 {
-	if (var_f->current->word[var_f->i] == 39 && var_f->closed == 1
-		&& var_f->current->word[var_f->i - 1] != '\\')
+	(void)head;
+	(void)env;
+	if (var_f->current->word[var_f->i] == 39 && var_f->closed == 1)
 		var_f->closed = 0;
 	else
 	{
-		if (var_f->current->word[var_f->i] == 39
-			&& var_f->current->word[var_f->i - 1] != '\\')
+		if (var_f->current->word[var_f->i] == 39)
 			var_f->closed = 1;
 	}
 }

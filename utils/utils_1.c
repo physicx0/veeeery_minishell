@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:16:14 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:44:19 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 15:16:21 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	malloca[total_len] = '\0';
 	return (free(s1), free(s2), malloca);
 }
-
+/*
 static int	comparer(char const *s1, char const *set, size_t index)
 {
 	int	i;
@@ -77,3 +77,4 @@ static int	comparer(char const *s1, char const *set, size_t index)
 	}
 	return (0);
 }
+*/

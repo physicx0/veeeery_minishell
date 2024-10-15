@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:14:32 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/13 21:02:32 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:09:43 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_rdr(char **arg, t_glob *glob, int infd, int outfd)
 		glob->exit_status = 1;
 		dup2(infd, 0);
 		dup2(outfd, 1);
-		printf("here\n");
+		dprintf(2, "here\n");
 		return (1);
 	}
 	return (0);

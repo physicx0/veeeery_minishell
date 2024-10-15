@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expanding.c                                        :+:      :+:    :+:   */
+/*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:40 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:54:33 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 23:40:15 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*heredoc_expand(char *string, t_env *env)
 	i = 0;
 	while (string[i])
 	{
-		if (string[i] == '$' && string[i - 1] != '\\' && string[i + 1] != '$')
+		if (string[i] == '$' && string[i + 1] != '$')
 		{
 			exported = expand(string, env, i);
 			if (!exported)

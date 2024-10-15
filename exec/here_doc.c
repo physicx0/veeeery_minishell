@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:57:15 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/13 18:20:17 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:42:16 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*add_char(char *line, char c)
 	}
 	new_line[i++] = c;
 	new_line[i] = '\0';
+	free(line);
 	return (new_line);
 }
 
@@ -50,7 +51,6 @@ void	sub_prs(t_token *node, t_glob *glob, char *file, t_token *prev)
 			line = heredoc_expand(line, *glob->env);
 		new_line = add_char(line, '\n');
 		ft_putstr_fd(new_line, fd);
-		free(line);
 		free(new_line);
 	}
 	close(fd);
@@ -91,7 +91,6 @@ void	x_hdoc(t_token *node, t_glob *glob, char *file, t_token *prev)
 void	here_doc(t_token *node, t_glob *glob, t_token *prev)
 {
 	char	*file;
-	char	*new_file;
 	int		c;
 
 	g_var = 0;
@@ -101,9 +100,7 @@ void	here_doc(t_token *node, t_glob *glob, t_token *prev)
 	{
 		if (node->word_token == PIPE)
 		{
-			new_file = add_char(file, c);
-			free(file);
-			file = new_file;
+			file = add_char(file, c);
 			c++;
 		}
 		if (node->word_token == HEREDOC)

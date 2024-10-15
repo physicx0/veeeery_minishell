@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:17:33 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 11:48:16 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/15 15:10:31 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ char		*readline_last(char *buffer);
  * free the object
  */
 void		readline_free(readline_t *rl);
-
+void		rl_replace_line (const char *string, int clear_undo);
 #endif

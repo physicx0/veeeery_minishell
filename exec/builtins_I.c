@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 07:45:16 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/14 23:48:58 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:22:09 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_echo(char **arg)
 	}
 	while (*arg)
 	{
-		printf("%s", *arg);
+		ft_putstr_fd(*arg, 1);
 		if (*(arg + 1))
 			printf(" ");
 		arg++;
