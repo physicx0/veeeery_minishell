@@ -59,8 +59,9 @@ int	trim_flager(char *string)
 void	content_trima(t_token *head)
 {
 	t_trim	trim;
-	char	c = 0;
+	char	c;
 
+	c = 0;
 	trim.closed = 1;
 	trim.i = 0;
 	trim.current = head;

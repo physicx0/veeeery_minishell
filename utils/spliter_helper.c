@@ -70,7 +70,8 @@ void	seter(t_trim *trim)
 
 void	trim_whiler(t_trim *trim, char *c)
 {
-	if ((trim->current->word[trim->i] == 39 || trim->current->word[trim->i] == 34)
+	if ((trim->current->word[trim->i] == 39
+			|| trim->current->word[trim->i] == 34)
 		&& trim->closed == 1)
 	{
 		*c = trim->current->word[trim->i];
