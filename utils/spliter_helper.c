@@ -80,7 +80,9 @@ void	trim_whiler(t_trim *trim, char *c)
 	}
 	if (trim->current->word[trim->i] == *c)
 		trim->closed = 1;
-	if (trim->closed == 0 || *c == 0)
+	if ((trim->closed == 0 || *c == 0)
+		|| (trim->current->word[trim->i] != 39
+			&& trim->current->word[trim->i] != 34))
 	{
 		trim->trimed[trim->y] = trim->current->word[trim->i];
 		trim->y++;
