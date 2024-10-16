@@ -140,6 +140,7 @@ typedef struct s_entry
 	char			**organized_input;
 }					t_entry;
 
+void				free_tree(t_tree *node);
 t_tree				*parse(t_token *tokens);
 t_tree				*create_tree_node(t_token *token);
 t_tree				*create_redirection_node(t_token *token);
@@ -194,7 +195,7 @@ char				*operation_returner(char *word, int i_word);
 int					word_count(char **string);
 char				**appender(char **string, int delimiter, int i_word);
 char				**input_organizer(char *parse_string);
-void				parsing_entry(char *parse_string, t_glob *glob);
+t_tree				*parsing_entry(char *parse_string, t_glob *glob);
 int					ft_strlen(const char *string);
 int					syntax_checker(char *parse_string);
 int					check_help(char *string, int i, int closed);

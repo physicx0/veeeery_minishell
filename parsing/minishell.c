@@ -12,41 +12,9 @@
 
 #include "../includes/minishell.h"
 
-int	g_var = 0;
+int		g_var = 0;
 
-void free_tree(t_tree *node)
-{
-    if (!node)
-        return;
-    if (node->word)
-        free(node->word);
-    free_tree(node->left);
-    free_tree(node->right);
-    free(node);
-}
-
-void	leaks(void)
-{
-	system("leaks minishell");
-}
-
-int	main(int ac, char *av[], char *env[])
-{
-	t_env	*our_env;
-	t_glob	glob;
-	
-//	atexit(leaks);
-	(void)ac;
-	(void)av;
-	our_env = env_dup(env);
-	glob.env = &our_env;
-	glob.exit_status = 0;
-	setup_main_signals();
-	while (1)
-		parsing_entry(readline("0xhb_shell$ "), &glob);
-}
-
-void	parsing_entry(char *parse_string, t_glob *glob)
+t_tree	*parsing_entry(char *parse_string, t_glob *glob)
 {
 	t_entry	var_ent;
 
@@ -56,9 +24,9 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	else if (syntax_checker(parse_string))
 	{
 		printf("syntax error\n");
-		glob->exit_status = 25;
+		glob->exit_status = 2;
 		free(parse_string);
-		return ;
+		return NULL;
 	}
 	var_ent.organized_input = input_organizer(parse_string);
 	var_ent.head = lexer(var_ent.organized_input);
@@ -70,16 +38,12 @@ void	parsing_entry(char *parse_string, t_glob *glob)
 	{
 		free(parse_string);
 		printf("EXIT_STATUS: %d\n", glob->exit_status);
-		return ;
+		return NULL;
 	}
 	var_ent.root = parse(var_ent.head);
-	exec(var_ent.root, glob);
-	printf("EXIT_STATUS: %d\n", glob->exit_status);
-	// unlink("/tmp/");
-	free_tree(var_ent.root);
 	link_free(var_ent.head);
 	link_free(var_ent.prev);
-	free(parse_string);
+	return (var_ent.root);
 }
 
 int	trim_flager(char *string)
@@ -89,7 +53,7 @@ int	trim_flager(char *string)
 	i = 0;
 	while (string[i])
 	{
-		if (string[i] == 34 || string[i] == 39 || string[i] == '\\')
+		if (string[i] == 34 || string[i] == 39)
 			return (1);
 		i++;
 	}

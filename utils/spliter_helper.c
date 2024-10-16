@@ -73,15 +73,19 @@ void	trim_whiler(t_trim *trim)
 	if ((trim->current->word[trim->i] == 39) && trim->closed == 1)
 		trim->closed = 0;
 	else
-		seter(trim);
-	if (trim->current->word[trim->i] != 39 || trim->current->word[trim->i] == 39)
+	{
+		if (trim->current->word[trim->i] == 39)
+			trim->closed = 1;
+	}
+	if ((trim->current->word[trim->i] != 39))
 	{
 		if ((trim->current->word[trim->i] == 34) && trim->closed == 0)
 		{
 			trim->trimed[trim->y] = trim->current->word[trim->i];
 			trim->y++;
 		}
-		else if (trim->current->word[trim->i] != 34 || trim->current->word[trim->i] == 39)
+		else if (trim->current->word[trim->i] != 34
+			|| trim->current->word[trim->i] == 39)
 		{
 			trim->trimed[trim->y] = trim->current->word[trim->i];
 			trim->y++;

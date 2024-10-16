@@ -86,3 +86,14 @@ int	caller(char *string, int y, int *i)
 	}
 	return (0);
 }
+
+void	free_tree(t_tree *node)
+{
+	if (!node)
+		return ;
+	if (node->word)
+		free(node->word);
+	free_tree(node->left);
+	free_tree(node->right);
+	free(node);
+}

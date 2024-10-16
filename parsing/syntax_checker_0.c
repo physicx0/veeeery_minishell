@@ -25,7 +25,10 @@ int	quotes_red_checker(char *string)
 		if (check_help(string, i, closed))
 			return (0);
 		if ((string[i] == 39 || string[i] == 34) && closed == 1)
+		{
 			quote = string[i];
+			closed = 0;
+		}
 		else
 		{
 			if (string[i] == quote)
@@ -78,7 +81,7 @@ int	pipe_checker(char *string, int *i, int closed)
 	int	y;
 
 	y = 0;
-	if (closed == 1 && (*i) == 0 && y != 0 && string[y] == '|')
+	if (!*i && string[y] == '|' && closed == 1)
 		return (1);
 	if (closed == 1 && string[y] == '|')
 	{
@@ -87,7 +90,7 @@ int	pipe_checker(char *string, int *i, int closed)
 		while (string[y] == ' ' || string[y] == '|' || !string[y]
 			|| string[y] == '&')
 		{
-			if (string[y] == '\0' || string[y] == '|' 
+			if (string[y] == '\0' || string[y] == '|'
 				|| string[y] == '&')
 				return (1);
 			y++;
