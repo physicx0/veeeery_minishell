@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-char	*heredoc_expand(char *string, t_env *env)
+char	*heredoc_expand(char *string, t_env *env, t_glob *glob)
 {
 	int		i;
 	char	*exported;
@@ -22,7 +22,7 @@ char	*heredoc_expand(char *string, t_env *env)
 	{
 		if (string[i] == '$' && string[i + 1] != '$')
 		{
-			exported = expand(string, env, i);
+			exported = expand(string, env, i, glob);
 			if (!exported)
 			{
 				string = ft_strdup("");

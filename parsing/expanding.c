@@ -12,20 +12,20 @@
 
 #include "../includes/minishell.h"
 
-char	*expan_helper_1(char *env_var, t_env *env, int i, t_expan *v_exp)
+char	*expan_helper_1(char *env_var, t_glob *glob, int i, t_expan *v_exp)
 {
 	v_exp->first_part = ft_substr(env_var, 0, i);
-	v_exp->search = value_returner(v_exp->search, env);
+	v_exp->search = value_returner(v_exp->search, *glob->env, glob);
 	if (v_exp->search)
 		return (free(v_exp->var), free(env_var), ft_strjoin(v_exp->first_part,
 				v_exp->search));
 	return (free(v_exp->var), free(env_var), (v_exp->first_part));
 }
 
-char	*expan_helper_2(char *env_var, t_env *env, int i, t_expan *v_exp)
+char	*expan_helper_2(char *env_var, t_glob *glob, int i, t_expan *v_exp)
 {
 	v_exp->first_part = ft_substr(env_var, 0, i);
-	v_exp->search = value_returner(v_exp->search, env);
+	v_exp->search = value_returner(v_exp->search, *glob->env, glob);
 	if (v_exp->search)
 	{
 		v_exp->second_part = ft_substr(env_var, ft_strlen(v_exp->first_part)
@@ -40,24 +40,25 @@ char	*expan_helper_2(char *env_var, t_env *env, int i, t_expan *v_exp)
 			v_exp->second_part));
 }
 
-char	*expand(char *env_var, t_env *env, int i)
+char	*expand(char *env_var, t_env *env, int i, t_glob *glob)
 {
 	t_expan	v_exp;
 
+	*glob->env = env;
 	v_exp.search = ft_substr(env_var, i + 1, env_length(&env_var[i + 1]));
 	v_exp.var = ft_strdup(v_exp.search);
 	if (!env_var[i + ft_strlen(v_exp.search) + 1] && i != 0)
-		return (expan_helper_1(env_var, env, i, &v_exp));
+		return (expan_helper_1(env_var, glob, i, &v_exp));
 	else if (env_var[i + ft_strlen(v_exp.search) + 1] && i != 0)
-		return (expan_helper_2(env_var, env, i, &v_exp));
+		return (expan_helper_2(env_var, glob, i, &v_exp));
 	else if (i == 0 && !env_var[i + ft_strlen(v_exp.search) + 1])
 	{
-		v_exp.search = value_returner(v_exp.search, env);
+		v_exp.search = value_returner(v_exp.search, env, glob);
 		if (v_exp.search)
 			return (free(v_exp.var), free(env_var), (v_exp.search));
 		return (free(v_exp.var), free(env_var), NULL);
 	}
-	v_exp.search = value_returner(v_exp.search, env);
+	v_exp.search = value_returner(v_exp.search, env, glob);
 	v_exp.first_part = ft_substr(env_var, ft_strlen(v_exp.var) + 1,
 			ft_strlen(env_var));
 	if (v_exp.search)

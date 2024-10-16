@@ -12,13 +12,13 @@
 
 #include "../includes/minishell.h"
 
-int	fla_helper(t_token *head, t_env *env, t_fla *var_f)
+int	fla_helper(t_token *head, t_env *env, t_fla *var_f, t_glob *glob)
 {
 	fla_helper_1(head, env, var_f);
 	if ((var_f->closed == 1) && var_f->current->word[var_f->i] == '$'
 		&& var_f->current->word[var_f->i + 1] != '$')
 	{
-		var_f->exported = expand(var_f->current->word, env, var_f->i);
+		var_f->exported = expand(var_f->current->word, env, var_f->i, glob);
 		if (!var_f->exported)
 		{
 			var_f->current->word_token = EMPTY;
@@ -35,7 +35,7 @@ int	fla_helper(t_token *head, t_env *env, t_fla *var_f)
 	return (0);
 }
 
-void	expand_flager(t_token *head, t_env *env)
+void	expand_flager(t_token *head, t_env *env, t_glob *glob)
 {
 	t_fla	var_f;
 
@@ -48,7 +48,7 @@ void	expand_flager(t_token *head, t_env *env)
 		var_f.i = 0;
 		while (var_f.current->word[var_f.i])
 		{
-			if (fla_helper(head, env, &var_f))
+			if (fla_helper(head, env, &var_f, glob))
 				break ;
 			var_f.i++;
 		}

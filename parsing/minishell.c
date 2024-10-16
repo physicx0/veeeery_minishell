@@ -34,7 +34,6 @@ t_tree	*parsing_entry(char *parse_string, t_glob *glob)
 		free(parse_string);
 		link_free(var_ent.head);
 		link_free(var_ent.prev);
-		printf("EXIT_STATUS: %d\n", glob->exit_status);
 		return (NULL);
 	}
 	var_ent.root = parse(var_ent.head, 0);

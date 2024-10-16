@@ -48,7 +48,7 @@ void	sub_prs(t_token *node, t_glob *glob, char *file, t_token *prev)
 		if (strict_strncmp(node->next->word, line))
 			break ;
 		if (!expand_triger(prev->next->word))
-			line = heredoc_expand(line, *glob->env);
+			line = heredoc_expand(line, *glob->env, glob);
 		new_line = add_char(line, '\n');
 		ft_putstr_fd(new_line, fd);
 		free(new_line);

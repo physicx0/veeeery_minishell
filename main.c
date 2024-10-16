@@ -38,7 +38,6 @@ int	main(int ac, char *av[], char *env[])
 		if (root)
 		{
 			exec(root, &glob);
-			printf("EXIT_STATUS: %d\n", glob.exit_status);
 			unlink("/tmp/");
 			free(line);
 			free_tree(root);

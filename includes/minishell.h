@@ -153,19 +153,20 @@ t_env				*new_link(char *string);
 t_token				*dup_head(t_token *head);
 t_token				*dup_linker(t_token *head);
 void				fla_helper_1(t_token *head, t_env *env, t_fla *var_f);
-int					fla_helper(t_token *head, t_env *env, t_fla *var_f);
-char				*expan_helper_1(char *env_var, t_env *env, int i,
+int					fla_helper(t_token *head, t_env *env, t_fla *var_f,
+						t_glob *glob);
+char				*expan_helper_1(char *env_var, t_glob *glob, int i,
 						t_expan *v_exp);
-char				*expan_helper_2(char *env_var, t_env *env, int i,
+char				*expan_helper_2(char *env_var, t_glob *glob, int i,
 						t_expan *v_exp);
 char				*ft_strjoin(char *s1, char *s2);
-void				expand_flager(t_token *head, t_env *env);
+void				expand_flager(t_token *head, t_env *env, t_glob *glob);
 int					expand_triger(char *line);
-char				*heredoc_expand(char *string, t_env *env);
-char				*expand(char *env_var, t_env *env, int i);
+char				*heredoc_expand(char *string, t_env *env, t_glob *glob);
+char				*expand(char *env_var, t_env *env, int i, t_glob *glob);
 int					env_length(char *env);
 void				trim_whiler(t_trim *trim);
-char				*value_returner(char *search, t_env *env);
+char				*value_returner(char *search, t_env *env, t_glob *glob);
 char				*exporter(char *search, char *env_line);
 void				content_trima(t_token *head);
 int					trim_flager(char *string);
@@ -209,7 +210,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				**commands_spliter(char const *s, char c);
 int					ft_strcmp(const char *str1, const char *str2);
 char				*ft_strdup(const char *str);
-
+char				*ft_itoa(int n);
 void				exec(t_tree *root, t_glob *glob);
 void				here_doc(t_token *node, t_glob *glob, t_token *prev);
 void				setup_main_signals(void);

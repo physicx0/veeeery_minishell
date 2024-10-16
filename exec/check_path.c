@@ -65,7 +65,6 @@ char	*check_path(char *cmd, t_glob *glob)
 		return (no_cmd(cmd, glob), NULL);
 	if (ft_strchr(cmd, '/'))
 	{
-		dprintf(2, "mok\n");
 		if (xf_ok(cmd, cmd, glob) == 0)
 			return (ft_strdup(cmd));
 		return (NULL);
@@ -73,7 +72,6 @@ char	*check_path(char *cmd, t_glob *glob)
 	path_info.path = find_path(*glob->env);
 	if (!path_info.path || !*path_info.path)
 	{
-		dprintf(2, "mok2\n");
 		getcwd(path_info.cwd, sizeof(path_info.cwd));
 		path_info.pathname = exec_strjoin(path_info.cwd, cmd);
 		if (xf_ok(cmd, path_info.pathname, glob) == -1)

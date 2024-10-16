@@ -77,13 +77,15 @@ char	*exporter(char *search, char *env_line)
 	return (NULL);
 }
 
-char	*value_returner(char *search, t_env *env)
+char	*value_returner(char *search, t_env *env, t_glob *glob)
 {
 	char	*exported;
 	t_env	*current;
 
 	current = env;
 	exported = NULL;
+	if (!ft_strcmp(search, "?"))
+		return (free(search), ft_itoa(glob->exit_status));
 	while (current)
 	{
 		exported = exporter(search, current->env_line);
