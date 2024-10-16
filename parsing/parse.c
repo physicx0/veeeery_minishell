@@ -59,10 +59,7 @@ t_tree	*create_command_subtree(t_token *tokens, int flager)
 		tokens = tokens->next;
 	}
 	if (flager == 1)
-	{
-		printf("lkajdf\n");	
 		link_free(head);
-	}
 	return (root);
 }
 
