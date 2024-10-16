@@ -165,7 +165,7 @@ int					expand_triger(char *line);
 char				*heredoc_expand(char *string, t_env *env, t_glob *glob);
 char				*expand(char *env_var, t_env *env, int i, t_glob *glob);
 int					env_length(char *env);
-void				trim_whiler(t_trim *trim);
+void				trim_whiler(t_trim *trim, char *c);
 char				*value_returner(char *search, t_env *env, t_glob *glob);
 char				*exporter(char *search, char *env_line);
 void				content_trima(t_token *head);

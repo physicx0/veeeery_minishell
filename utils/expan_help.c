@@ -16,7 +16,11 @@ int	fla_helper(t_token *head, t_env *env, t_fla *var_f, t_glob *glob)
 {
 	fla_helper_1(head, env, var_f);
 	if ((var_f->closed == 1) && var_f->current->word[var_f->i] == '$'
-		&& var_f->current->word[var_f->i + 1] != '$')
+		&& var_f->current->word[var_f->i + 1] != '$'
+		&& var_f->current->word[var_f->i + 1] != 39
+		&& var_f->current->word[var_f->i + 1] != 34
+		&& var_f->current->word[var_f->i + 1] != ' '
+		&& var_f->current->word[var_f->i + 1] != '\0')
 	{
 		var_f->exported = expand(var_f->current->word, env, var_f->i, glob);
 		if (!var_f->exported)

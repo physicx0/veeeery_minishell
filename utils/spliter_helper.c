@@ -68,28 +68,21 @@ void	seter(t_trim *trim)
 		trim->closed = 1;
 }
 
-void	trim_whiler(t_trim *trim)
+void	trim_whiler(t_trim *trim, char *c)
 {
-	if ((trim->current->word[trim->i] == 39) && trim->closed == 1)
+	if ((trim->current->word[trim->i] == 39 || trim->current->word[trim->i] == 34)
+		&& trim->closed == 1)
+	{
+		*c = trim->current->word[trim->i];
 		trim->closed = 0;
-	else
-	{
-		if (trim->current->word[trim->i] == 39)
-			trim->closed = 1;
+		trim->i++;
 	}
-	if ((trim->current->word[trim->i] != 39))
+	if (trim->current->word[trim->i] == *c)
+		trim->closed = 1;
+	if (trim->closed == 0 || *c == 0)
 	{
-		if ((trim->current->word[trim->i] == 34) && trim->closed == 0)
-		{
-			trim->trimed[trim->y] = trim->current->word[trim->i];
-			trim->y++;
-		}
-		else if (trim->current->word[trim->i] != 34
-			|| trim->current->word[trim->i] == 39)
-		{
-			trim->trimed[trim->y] = trim->current->word[trim->i];
-			trim->y++;
-		}
+		trim->trimed[trim->y] = trim->current->word[trim->i];
+		trim->y++;
 	}
 }
 

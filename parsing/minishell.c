@@ -59,6 +59,7 @@ int	trim_flager(char *string)
 void	content_trima(t_token *head)
 {
 	t_trim	trim;
+	char	c = 0;
 
 	trim.closed = 1;
 	trim.i = 0;
@@ -72,7 +73,7 @@ void	content_trima(t_token *head)
 			trim.trimed = malloc(ft_strlen(trim.current->word) + 1);
 			while (trim.current->word[trim.i])
 			{
-				trim_whiler(&trim);
+				trim_whiler(&trim, &c);
 				trim.i++;
 			}
 			trim.trimed[trim.y] = '\0';
