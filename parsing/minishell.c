@@ -26,21 +26,18 @@ t_tree	*parsing_entry(char *parse_string, t_glob *glob)
 		printf("syntax error\n");
 		glob->exit_status = 2;
 		free(parse_string);
-		return NULL;
+		return (NULL);
 	}
-	var_ent.organized_input = input_organizer(parse_string);
-	var_ent.head = lexer(var_ent.organized_input);
-	var_ent.prev = dup_head(var_ent.head);
-	expand_flager(var_ent.head, *glob->env);
-	content_trima(var_ent.head);
-	here_doc(var_ent.head, glob, var_ent.prev);
+	entry_helper(&var_ent, glob, parse_string);
 	if (g_var)
 	{
 		free(parse_string);
+		link_free(var_ent.head);
+		link_free(var_ent.prev);
 		printf("EXIT_STATUS: %d\n", glob->exit_status);
-		return NULL;
+		return (NULL);
 	}
-	var_ent.root = parse(var_ent.head);
+	var_ent.root = parse(var_ent.head, 0);
 	link_free(var_ent.head);
 	link_free(var_ent.prev);
 	return (var_ent.root);

@@ -21,9 +21,10 @@ int	main(int ac, char *av[], char *env[])
 {
 	t_env	*our_env;
 	t_glob	glob;
-    char    *line;
-    t_tree  *root;
-//	atexit(leaks);
+	char	*line;
+	t_tree	*root;
+
+	// atexit(leaks);
 	(void)ac;
 	(void)av;
 	our_env = env_dup(env);
@@ -31,10 +32,10 @@ int	main(int ac, char *av[], char *env[])
 	glob.exit_status = 0;
 	setup_main_signals();
 	while (1)
-    {
-        line = readline("0xhb_shell$ ");
+	{
+		line = readline("0xhb_shell$ ");
 		root = parsing_entry(line, &glob);
-        if (root)
+		if (root)
 		{
 			exec(root, &glob);
 			printf("EXIT_STATUS: %d\n", glob.exit_status);
@@ -42,5 +43,5 @@ int	main(int ac, char *av[], char *env[])
 			free(line);
 			free_tree(root);
 		}
-    }
+	}
 }

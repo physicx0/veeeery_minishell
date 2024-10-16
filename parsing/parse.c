@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-t_tree	*parse(t_token *tokens)
+t_tree	*parse(t_token *tokens, int flager)
 {
 	t_parse	prs;
 
@@ -33,19 +33,21 @@ t_tree	*parse(t_token *tokens)
 	if (prs.pipe_operator)
 	{
 		prs.root = create_operator_node(prs.pipe_operator);
-		prs.root->left = parse(split_tokens(tokens, prs.pipe_operator));
-		prs.root->right = parse(prs.pipe_operator->next);
+		prs.root->left = parse(split_tokens(tokens, prs.pipe_operator), 1);
+		prs.root->right = parse(prs.pipe_operator->next, 0);
 	}
 	else
-		prs.root = create_command_subtree(tokens);
+		prs.root = create_command_subtree(tokens, flager);
 	return (prs.root);
 }
 
-t_tree	*create_command_subtree(t_token *tokens)
+t_tree	*create_command_subtree(t_token *tokens, int flager)
 {
 	t_tree	*root;
 	t_tree	*current_node;
+	t_token	*head;
 
+	head = tokens;
 	root = NULL;
 	while (tokens)
 	{
@@ -56,21 +58,51 @@ t_tree	*create_command_subtree(t_token *tokens)
 			link_command_node(root, current_node);
 		tokens = tokens->next;
 	}
+	if (flager == 1)
+	{
+		printf("lkajdf\n");	
+		link_free(head);
+	}
 	return (root);
+}
+
+t_token	*dup_splited(t_token *tokens, t_token *operator_token)
+{
+	t_token	*head;
+	t_token	*current;
+	t_token	*new_one;
+	t_token	*looper;
+
+	head = NULL;
+	current = tokens;
+	looper = tokens;
+	while (looper && looper != operator_token)
+	{
+		new_one = dup_linker(looper);
+		if (!head)
+		{
+			head = new_one;
+			current = new_one;
+		}
+		else
+		{
+			current->next = new_one;
+			current = new_one;
+		}
+		looper = looper->next;
+		tokens = tokens->next;
+	}
+	return (head);
 }
 
 t_token	*split_tokens(t_token *tokens, t_token *operator_token)
 {
-	t_token	*current;
+	t_token	*head;
 
 	if (!tokens || !operator_token)
 		return (tokens);
-	current = tokens;
-	while (current && current->next != operator_token)
-		current = current->next;
-	if (current)
-		current->next = NULL;
-	return (tokens);
+	head = dup_splited(tokens, operator_token);
+	return (head);
 }
 
 void	print_tree(t_tree *node, int caller)

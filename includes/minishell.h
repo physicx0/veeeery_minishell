@@ -140,13 +140,13 @@ typedef struct s_entry
 	char			**organized_input;
 }					t_entry;
 
+void				entry_helper(t_entry *var_ent, t_glob *glob,
+						char *parse_string);
 void				free_tree(t_tree *node);
-t_tree				*parse(t_token *tokens);
+t_tree				*parse(t_token *tokens, int flager);
 t_tree				*create_tree_node(t_token *token);
-t_tree				*create_redirection_node(t_token *token);
 t_token				*split_token(t_token *tokens, t_token *operator_token);
-t_tree				*create_command_subtree(t_token *tokens);
-t_tree				*create_redirection_node(t_token *token);
+t_tree				*create_command_subtree(t_token *tokens, int flager);
 t_tree				*create_operator_node(t_token *token);
 t_token				*split_tokens(t_token *tokens, t_token *operator_token);
 t_env				*new_link(char *string);
