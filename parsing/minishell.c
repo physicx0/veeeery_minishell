@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:05 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/17 02:55:26 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/17 04:42:09 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_tree	*parsing_entry(char *parse_string, t_glob *glob)
 	else if (syntax_checker(parse_string))
 	{
 		printf("syntax error\n");
-		glob->exit_status = 2;
+		glob->exit_status = 258;
 		free(parse_string);
 		return (NULL);
 	}

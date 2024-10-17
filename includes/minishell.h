@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:12:34 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/17 02:37:01 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/17 04:56:52 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,15 @@ typedef struct s_entry
 	t_tree			*root;
 	char			**organized_input;
 }					t_entry;
+
+typedef struct s_herh
+{
+	char	*file;
+	t_token	*looper;
+	t_token	*looper1;
+	t_token	*looper2;
+	int		c;
+}					t_herh;
 
 void				entry_helper(t_entry *var_ent, t_glob *glob,
 						char *parse_string);

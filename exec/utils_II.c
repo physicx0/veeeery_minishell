@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_II.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 02:54:15 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/13 20:54:07 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/17 05:00:46 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,11 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	else if ((unsigned char)s1[i] > (unsigned char)s2[i])
 		return (1);
 	return (0);
+}
+
+void	her_init(t_herh *herh, t_entry *var_ent)
+{
+	herh->looper = var_ent->head;
+	herh->looper1 = var_ent->new;
+	herh->looper2 = var_ent->prev;
 }

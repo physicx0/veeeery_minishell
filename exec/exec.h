@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:57:15 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/15 23:25:35 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/17 04:59:39 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,5 @@ void		ft_tolower(char *c);
 int			ft_isnum(int c);
 int			ft_isdigit(int c);
 void		ft_putstr_fd(char *s, int fd);
-
+void		her_init(t_herh *herh, t_entry *var_ent);
 #endif

@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:57:15 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/17 02:52:06 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/17 05:00:32 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,29 @@ void	x_hdoc(t_entry *var_ent, t_glob *glob, char *file)
 
 void	here_doc(t_entry *var_ent, t_glob *glob)
 {
-	char	*file;
-	t_token	*looper;
-	int		c;
+	t_herh	herh;
 
-	looper = var_ent->head;
+	her_init(&herh, var_ent);
 	g_var = 0;
-	file = ft_strdup("/tmp/.HeRe_DoC");
-	c = 'a';
+	herh.file = ft_strdup("/tmp/.HeRe_DoC");
+	herh.c = 'a';
 	while (var_ent->head)
 	{
 		if (var_ent->head->word_token == PIPE)
 		{
-			file = add_char(file, c);
-			c++;
+			herh.file = add_char(herh.file, herh.c);
+			herh.c++;
 		}
 		if (var_ent->head->word_token == HEREDOC)
-			x_hdoc(var_ent, glob, file);
+			x_hdoc(var_ent, glob, herh.file);
 		if (g_var)
 			break ;
 		var_ent->head = var_ent->head->next;
 		var_ent->prev = var_ent->prev->next;
 		var_ent->new = var_ent->new->next;
 	}
-	var_ent->head = looper;
-	free(file);
+	var_ent->head = herh.looper;
+	var_ent->new = herh.looper1;
+	var_ent->prev = herh.looper2;
+	free(herh.file);
 }
