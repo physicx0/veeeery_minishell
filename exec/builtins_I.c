@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 07:45:16 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/15 21:22:09 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:24:17 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	ft_echo(char **arg)
 	{
 		ft_putstr_fd(*arg, 1);
 		if (*(arg + 1))
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 		arg++;
 	}
 	if (!new_line)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 	return (0);
 }
 
@@ -60,20 +60,15 @@ int	ft_cd(char **arg, t_env **env)
 	char	cwd[PATH_MAX];
 
 	getcwd(owd, sizeof(owd));
-	if (arg[1] && arg[2])
-	{
-		ft_putstr_fd("cd : too many arguments\n", 2);
-		return (1);
-	}
-	else if (!arg[1] || !arg[1][0])
-		path = getenv("HOME");
+	arg++;
+	if (!*arg || !**arg)
+		path = find_var(*env, "HOME=");
 	else
-		path = arg[1];
+		path = *arg;
+	if (!path)
+		return (ft_putstr_fd("cd: HOME not set\n", 2), 1);
 	if (chdir(path) == -1)
-	{
-		perror("cd");
-		return (1);
-	}
+		return (perror("cd"), 1);
 	getcwd(cwd, sizeof(cwd));
 	update_env(cwd, owd, env);
 	return (0);
@@ -86,7 +81,8 @@ int	ft_pwd(void)
 	pwd = getcwd(NULL, 0);
 	if (pwd)
 	{
-		printf("%s\n", pwd);
+		ft_putstr_fd(pwd, 1);
+		ft_putstr_fd("\n", 1);
 		free(pwd);
 	}
 	return (0);

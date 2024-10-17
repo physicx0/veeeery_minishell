@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:57:15 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/13 18:20:17 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:25:35 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			left_cmd(t_tree *root, t_glob *glob, t_pipe *strc);
 int			right_cmd(t_tree *root, t_glob *glob, t_pipe *strc);
 void		pipe_cmd(t_tree *root, t_glob *glob);
 void		exit_status(int wstatus, t_glob *glob);
-char		*find_path(t_env *env_list);
+char		*find_var(t_env *env_list, char *var);
 int			no_prms(char *cmd, t_glob *glob);
 int			no_path(char *cmd, t_glob *glob);
 int			no_cmd(char *cmd, t_glob *glob);

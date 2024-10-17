@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:05 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/15 23:37:28 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/17 02:55:26 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ t_tree	*parsing_entry(char *parse_string, t_glob *glob)
 		free(parse_string);
 		link_free(var_ent.head);
 		link_free(var_ent.prev);
+		link_free(var_ent.new);
 		return (NULL);
 	}
 	var_ent.root = parse(var_ent.head, 0);
-	link_free(var_ent.head);
-	link_free(var_ent.prev);
-	return (var_ent.root);
+	return (link_free(var_ent.head), link_free(var_ent.prev),
+		link_free(var_ent.new), var_ent.root);
 }
 
 int	trim_flager(char *string)

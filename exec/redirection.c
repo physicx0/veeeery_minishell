@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 05:11:49 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/11 23:53:33 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:52:41 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	redirect_io(char **arg)
 			res = redirect(arg[i + 1], 3);
 		if (!ft_strcmp(arg[i], "<<"))
 			res = redirect(arg[i + 1], 4);
+		if (res)
+			break ;
 		i++;
 	}
 	return (res);

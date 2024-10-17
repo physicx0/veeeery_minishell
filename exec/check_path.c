@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 07:37:03 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/14 22:42:36 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:26:09 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ char	*x_path(char *cmd, t_path *path_info, t_glob *glob)
 		if (access(path_info->pathname, F_OK) == 0)
 		{
 			if (access(path_info->pathname, X_OK) == 0)
-			{
-				free_split(path_info->env_to_free);
-				return (path_info->pathname);
-			}
+				return (free_split(path_info->env_to_free),
+					(path_info->pathname));
 			bola = 1;
 		}
 		free(path_info->pathname);
@@ -69,7 +67,7 @@ char	*check_path(char *cmd, t_glob *glob)
 			return (ft_strdup(cmd));
 		return (NULL);
 	}
-	path_info.path = find_path(*glob->env);
+	path_info.path = find_var(*glob->env, "PATH=");
 	if (!path_info.path || !*path_info.path)
 	{
 		getcwd(path_info.cwd, sizeof(path_info.cwd));

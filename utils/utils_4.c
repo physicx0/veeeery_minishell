@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expan_help.c                                       :+:      :+:    :+:   */
+/*   utils_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:16:04 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/15 23:38:50 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/17 02:45:12 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	entry_helper(t_entry *var_ent, t_glob *glob, char *parse_string)
 {
 	var_ent->organized_input = input_organizer(parse_string);
 	var_ent->head = lexer(var_ent->organized_input);
+	var_ent->new = dup_head(var_ent->head);
 	var_ent->prev = dup_head(var_ent->head);
 	expand_flager(var_ent->head, *glob->env, glob);
 	content_trima(var_ent->head);
-	here_doc(var_ent->head, glob, var_ent->prev);
+	content_trima(var_ent->new);
+	here_doc(var_ent, glob);
 }
 
 static char	*negative_allocater(unsigned int n, int col)

@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_expand.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:15:40 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/15 23:40:15 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/17 02:21:43 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-void	leaks(void)
+void	clear_files(void)
 {
-	system("leaks minishell");
+	char	*file;
+	int		c;
+
+	file = ft_strdup("/tmp/.HeRe_DoC");
+	c = 'a';
+	while (1)
+	{
+		if (access(file, F_OK) != 0)
+			break ;
+		unlink(file);
+		file = add_char(file, c);
+		c++;
+	}
+	free(file);
 }
 
 int	main(int ac, char *av[], char *env[])
@@ -24,7 +37,6 @@ int	main(int ac, char *av[], char *env[])
 	char	*line;
 	t_tree	*root;
 
-	// atexit(leaks);
 	(void)ac;
 	(void)av;
 	our_env = env_dup(env);
@@ -38,7 +50,7 @@ int	main(int ac, char *av[], char *env[])
 		if (root)
 		{
 			exec(root, &glob);
-			unlink("/tmp/");
+			clear_files();
 			free(line);
 			free_tree(root);
 		}

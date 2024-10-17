@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:16:04 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/09/27 13:41:50 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/17 02:14:15 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static size_t	substring_len(char const *s, char delimiter)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == delimiter && closed == 1)
+		if ((s[i] == delimiter || s[i] == '\t') && closed == 1)
 			break ;
-		if ((s[i] == 39 || s[i] == 34) && closed == 1 && s[i - 1] != '\\')
+		if ((s[i] == 39 || s[i] == 34) && closed == 1)
 		{
 			closed = 0;
 			quote = s[i];
@@ -73,7 +73,8 @@ static char	**sub_filler(char const *s, char delimiter, char **substring,
 	sv.y = 0;
 	while (sv.i < sub_counts)
 	{
-		while (s[sv.y] && s[sv.y] == delimiter && sv.closed == 1)
+		while (s[sv.y] && sv.closed == 1 
+			&& (s[sv.y] == delimiter || s[sv.y] == '\t'))
 			sv.y++;
 		substring[sv.i] = ft_substr(s, sv.y, substring_len(&s[sv.y],
 					delimiter));

@@ -6,19 +6,19 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 19:09:34 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/06 19:35:44 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:24:54 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char	*find_path(t_env *env_list)
+char	*find_var(t_env *env_list, char *var)
 {
 	char	*path;
 
 	while (env_list)
 	{
-		path = ft_strnstr(env_list->env_line, "PATH=", 5);
+		path = ft_strnstr(env_list->env_line, var, ft_strlen(var));
 		if (path)
 			return (path);
 		env_list = env_list->next;

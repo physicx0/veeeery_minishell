@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:12:34 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/15 15:11:02 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/17 02:37:01 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include "readline.h"
 
 extern int			g_var;
 
@@ -134,6 +133,7 @@ typedef struct s_fla
 
 typedef struct s_entry
 {
+	t_token			*new;
 	t_token			*head;
 	t_token			*prev;
 	t_tree			*root;
@@ -212,10 +212,12 @@ int					ft_strcmp(const char *str1, const char *str2);
 char				*ft_strdup(const char *str);
 char				*ft_itoa(int n);
 void				exec(t_tree *root, t_glob *glob);
-void				here_doc(t_token *node, t_glob *glob, t_token *prev);
+void				here_doc(t_entry *var_ent, t_glob *glob);
 void				setup_main_signals(void);
 void				main_sigquit(int sigquit);
 void				main_sigint(int sigint);
 void				reset_signals(void);
 void				hdoc_signals(void);
+void				rl_replace_line(const char *string, int clear_undo);
+char				*add_char(char *line, char c);
 #endif
