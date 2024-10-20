@@ -6,7 +6,7 @@
 /*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:52:55 by bbelarra42        #+#    #+#             */
-/*   Updated: 2024/10/17 04:42:28 by bbelarra42       ###   ########.fr       */
+/*   Updated: 2024/10/18 02:38:32 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ int	env_length(char *env)
 	int	i;
 
 	i = 0;
-	if (env[0] == '?')
+	if (env[0] == '?' 
+		|| (env[0] >= '0' && env[0] <= '9'))
 		return (1);
-	while (env[i] && env[i] != 32 && env[i] != '$' && env[i] != 34
-		&& env[i] != 39 && env[i] != '=' && env[i] != '.'
-		&& env[i] != '/' && env[i] != ';' && env[i] != '%')
+	while ((env[i] && (env[i] >= 65 && env[i] <= 90))
+		|| (env[i] >= 97 && env[i] <= 122)
+		|| (env[i] >= '0' && env[i] <= '9') || env[i] == '_')
 		i++;
 	return (i);
 }

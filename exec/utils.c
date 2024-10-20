@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbelarra42 <bbelarra@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 07:09:26 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/10/13 18:08:04 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/10/18 02:04:29 by bbelarra42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ char	**env_to_arr(t_env *env)
 	if (!arr)
 		return (NULL);
 	i = 0;
-	if (!env)
-		printf("fuck you\n");
 	while (env)
 	{
 		arr[i] = env->env_line;
